@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIFT Titanium - Product Management Admin</title>
+  <style>
+    :root {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #141414;
+      --bg-card: #1a1a1a;
+      --bg-hover: #222222;
+      --gold: #C0A062;
+      --gold-light: #d4b87a;
+      --gold-dark: #a08542;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      --border: #2a2a2a;
+      --success: #4ade80;
+      --danger: #f87171;
+      --warning: #fbbf24;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+    
+    /* Header */
+    .admin-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .admin-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .admin-logo h1 {
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+    
+    .admin-logo span {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    /* Buttons */
+    .btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-primary);
+    }
+    
+    .btn-primary:hover {
+      background: var(--gold-light);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      border-color: var(--gold);
+    }
+    
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #ef4444;
+    }
+    
+    .btn-success {
+      background: var(--success);
+      color: var(--bg-primary);
+    }
+    
+    .btn-success:hover {
+      background: #22c55e;
+    }
+    
+    .btn-sm {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+    }
+    
+    .btn-lg {
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+    }
+    
+    /* Layout */
+    .admin-container {
+      display: flex;
+      min-height: calc(100vh - 70px);
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      flex-shrink: 0;
+    }
+    
+    .sidebar-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    .sidebar-title {
+      padding: 0 1.5rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .sidebar-nav {
+      list-style: none;
+    }
+    
+    .sidebar-nav li {
+      margin-bottom: 0.25rem;
+    }
+    
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: var(--bg-hover);
+      color: var(--gold);
+      border-left: 3px solid var(--gold);
+    }
+    
+    .sidebar-nav .series-badge {
+      font-size: 0.75rem;
+      background: var(--bg-card);
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .content-header h2 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+    }
+    
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    /* Product Card */
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    
+    .product-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(192, 160, 98, 0.1);
+    }
+    
+    .product-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    
+    .product-series {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .product-series-badge {
+      background: var(--gold);
+      color: var(--bg-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .product-category {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    
+    .product-card-body {
+      padding: 1.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      transition: border-color 0.2s;
+    }
+    
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    
+    .form-input-sm {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    /* Tags Input */
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      min-height: 42px;
+    }
+    
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    
+    .tag-remove {
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    
+    .tag-remove:hover {
+      color: var(--danger);
+    }
+    
+    .tag-input {
+      flex: 1;
+      min-width: 80px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+    }
+    
+    .tag-input:focus {
+      outline: none;
+    }
+    
+    /* Image Preview */
+    .image-preview {
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+    
+    .image-preview img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+    }
+    
+    .image-preview-error {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    
+    /* Badge Select */
+    .badge-select {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .badge-option {
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .badge-option:hover {
+      border-color: var(--gold);
+    }
+    
+    .badge-option.selected {
+      background: var(--gold);
+      color: var(--bg-primary);
+      border-color: var(--gold);
+    }
+    
+    /* Sub Products */
+    .sub-products-section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .sub-products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .sub-products-header h4 {
+      font-size: 0.875rem;
+      color: var(--gold);
+    }
+    
+    .sub-product-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .sub-product-card:hover {
+      border-color: var(--gold-dark);
+    }
+    
+    .sub-product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    
+    .sub-product-name {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    
+    /* Product Card Footer */
+    .product-card-footer {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal {
+      background: var(--bg-card);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s;
+    }
+    
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+    
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-header h3 {
+      font-size: 1.125rem;
+      color: var(--gold);
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    .modal-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+    
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .toast {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      animation: slideIn 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .toast-success {
+      background: var(--success);
+      color: var(--bg-primary);
+    }
+    
+    .toast-error {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .toast-warning {
+      background: var(--warning);
+      color: var(--bg-primary);
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Loading */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    
+    .loading-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+    
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .empty-state h3 {
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+      }
+      
+      .sidebar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 1rem;
+      }
+      
+      .sidebar-nav a {
+        padding: 0.5rem 1rem;
+        border-left: none;
+        border-radius: 4px;
+      }
+      
+      .sidebar-nav a.active {
+        border-left: none;
+        background: var(--bg-hover);
+      }
+      
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-actions {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-logo">
+      <h1>GIFT Titanium</h1>
+      <span>Product Management</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary" onclick="exportJSON()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        Export JSON
+      </button>
+      <button class="btn btn-secondary" onclick="importJSON()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+        </svg>
+        Import JSON
+      </button>
+      <button class="btn btn-primary" onclick="saveChanges()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17,21 17,13 7,13 7,21"/>
+          <polyline points="7,3 7,8 15,8"/>
+        </svg>
+        Save Changes
+      </button>
+      <button class="btn btn-success" onclick="buildWebsite()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+        Generate Website
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Quick Actions</div>
+        <ul class="sidebar-nav">
+          <li><a href="#" onclick="filterProducts('all')" class="active" data-filter="all">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            All Products
+            <span class="series-badge" id="total-count">0</span>
+          </a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-title">Product Series</div>
+        <ul class="sidebar-nav" id="series-nav">
+          <!-- Dynamically populated -->
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-title">Categories</div>
+        <ul class="sidebar-nav" id="category-nav">
+          <!-- Dynamically populated -->
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-products">0</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-series">0</div>
+          <div class="stat-label">Series</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-min-price">-</div>
+          <div class="stat-label">Min Price</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-max-price">-</div>
+          <div class="stat-label">Max Price</div>
+        </div>
+      </div>
+      
+      <div class="content-header">
+        <h2 id="current-filter-title">All Products</h2>
+        <button class="btn btn-primary" onclick="openAddProductModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Add Product
+        </button>
+      </div>
+      
+      <div class="product-grid" id="product-grid">
+        <!-- Dynamically populated -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Product</h3>
+        <button class="modal-close" onclick="closeProductModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="product-form">
+          <input type="hidden" id="product-id">
+          <input type="hidden" id="is-new-product" value="false">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Series (e.g., G1)</label>
+              <input type="text" class="form-input" id="product-series" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Series Name</label>
+              <input type="text" class="form-input" id="product-series-name" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Product Title</label>
+            <input type="text" class="form-input" id="product-title" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" id="product-description" required></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Min Price ($)</label>
+              <input type="number" class="form-input" id="product-price-min" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Max Price ($)</label>
+              <input type="number" class="form-input" id="product-price-max" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-input" id="product-category">
+              <option value="thermos">Thermos</option>
+              <option value="outdoor">Outdoor</option>
+              <option value="office">Office</option>
+              <option value="kids">Kids</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Slug (URL)</label>
+            <input type="text" class="form-input" id="product-slug" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Main Image Path</label>
+            <input type="text" class="form-input" id="product-main-image" placeholder="images/g1-thermos-main.jpg">
+            <div class="image-preview" id="main-image-preview"></div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Badge</label>
+            <div class="badge-select" id="badge-select">
+              <span class="badge-option" data-badge="">None</span>
+              <span class="badge-option" data-badge="Bestseller">Bestseller</span>
+              <span class="badge-option" data-badge="New">New</span>
+              <span class="badge-option" data-badge="Safe">Safe</span>
+              <span class="badge-option" data-badge="Premium">Premium</span>
+              <span class="badge-option" data-badge="Flagship">Flagship</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Features (Press Enter to add)</label>
+            <div class="tags-container" id="features-tags">
+              <input type="text" class="tag-input" id="feature-input" placeholder="Type and press Enter">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Delete Product</h3>
+        <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this product? This action cannot be undone.</p>
+        <p style="margin-top: 1rem; color: var(--danger);" id="delete-product-name"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="import-file" accept=".json" style="display: none;">
+
+  <script>
+    // State
+    let productsData = null;
+    let currentFilter = 'all';
+    let deleteProductId = null;
+    let currentFeatures = [];
+
+    // Initialize
+    async function init() {
+      showLoading();
+      try {
+        const response = await fetch('/api/products');
+        productsData = await response.json();
+        renderSidebar();
+        renderProducts();
+        updateStats();
+      } catch (error) {
+        console.error('Failed to load products:', error);
+        showToast('Failed to load products. Make sure server is running.', 'error');
+        // Load from file directly as fallback
+        try {
+          const fileResponse = await fetch('./products.json');
+          productsData = await fileResponse.json();
+          renderSidebar();
+          renderProducts();
+          updateStats();
+        } catch (e) {
+          showToast('Could not load products.json', 'error');
+        }
+      }
+      hideLoading();
+    }
+
+    // Render Sidebar
+    function renderSidebar() {
+      // Series nav
+      const seriesNav = document.getElementById('series-nav');
+      const seriesSet = new Set(productsData.products.map(p => p.series));
+      seriesNav.innerHTML = Array.from(seriesSet).map(series => {
+        const product = productsData.products.find(p => p.series === series);
+        const count = productsData.products.filter(p => p.series === series).length;
+        return `
+          <li><a href="#" onclick="filterProducts('${series}')" data-filter="${series}">
+            <span>${product.seriesName}</span>
+            <span class="series-badge">${count}</span>
+          </a></li>
+        `;
+      }).join('');
+
+      // Category nav
+      const categoryNav = document.getElementById('category-nav');
+      const categories = [
+        { key: 'thermos', name: 'Thermos' },
+        { key: 'outdoor', name: 'Outdoor' },
+        { key: 'office', name: 'Office' },
+        { key: 'kids', name: 'Kids' },
+        { key: 'other', name: 'Accessories' }
+      ];
+      categoryNav.innerHTML = categories.map(cat => {
+        const count = productsData.products.filter(p => p.category === cat.key).length;
+        if (count === 0) return '';
+        return `
+          <li><a href="#" onclick="filterProducts('${cat.key}')" data-filter="cat-${cat.key}">
+            <span>${cat.name}</span>
+            <span class="series-badge">${count}</span>
+          </a></li>
+        `;
+      }).join('');
+      
+      document.getElementById('total-count').textContent = productsData.products.length;
+    }
+
+    // Render Products
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      let filteredProducts = productsData.products;
+
+      if (currentFilter !== 'all') {
+        if (currentFilter.startsWith('cat-')) {
+          const category = currentFilter.replace('cat-', '');
+          filteredProducts = productsData.products.filter(p => p.category === category);
+        } else {
+          filteredProducts = productsData.products.filter(p => p.series === currentFilter);
+        }
+      }
+
+      if (filteredProducts.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📦</div>
+            <h3>No Products Found</h3>
+            <p>Add your first product to get started.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filteredProducts.map(product => `
+        <div class="product-card" data-product-id="${product.id}">
+          <div class="product-card-header">
+            <div class="product-series">
+              <span class="product-series-badge">${product.series}</span>
+              <span class="product-category">${product.category}</span>
+            </div>
+            ${product.badge ? `<span class="badge-option selected" style="pointer-events:none">${product.badge}</span>` : ''}
+          </div>
+          <div class="product-card-body">
+            <div class="form-group">
+              <label class="form-label">Title</label>
+              <input type="text" class="form-input form-input-sm" value="${product.title}" 
+                     onchange="updateProduct('${product.id}', 'title', this.value)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea class="form-textarea form-input-sm" 
+                       onchange="updateProduct('${product.id}', 'description', this.value)">${product.description}</textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Min Price ($)</label>
+                <input type="number" class="form-input form-input-sm" value="${product.priceMin}"
+                       onchange="updateProduct('${product.id}', 'priceMin', parseInt(this.value))">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Max Price ($)</label>
+                <input type="number" class="form-input form-input-sm" value="${product.priceMax}"
+                       onchange="updateProduct('${product.id}', 'priceMax', parseInt(this.value))">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Main Image Path</label>
+              <input type="text" class="form-input form-input-sm" value="${product.mainImage}"
+                     onchange="updateProduct('${product.id}', 'mainImage', this.value)">
+              ${product.mainImage ? `
+                <div class="image-preview">
+                  <img src="${product.mainImage}" alt="${product.title}" onerror="this.parentElement.innerHTML='<div class=image-preview-error>Image not found</div>'">
+                </div>
+              ` : ''}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Features</label>
+              <div class="tags-container">
+                ${product.features.map((f, i) => `
+                  <span class="tag">
+                    ${f}
+                    <span class="tag-remove" onclick="removeFeature('${product.id}', ${i})">&times;</span>
+                  </span>
+                `).join('')}
+                <input type="text" class="tag-input" placeholder="Add and press Enter"
+                       onkeypress="if(event.key==='Enter'){event.preventDefault();addFeature('${product.id}', this.value);this.value=''}">
+              </div>
+            </div>
+            
+            ${product.subProducts && product.subProducts.length > 0 ? `
+              <div class="sub-products-section">
+                <div class="sub-products-header">
+                  <h4>Sub-Products (${product.subProducts.length})</h4>
+                </div>
+                ${product.subProducts.map(sub => `
+                  <div class="sub-product-card">
+                    <div class="sub-product-header">
+                      <span class="sub-product-name">${sub.nameCn ? sub.name + ' ' + sub.nameCn : sub.name}</span>
+                      <button class="btn btn-sm btn-secondary" onclick="editSubProduct('${product.id}', '${sub.id}')">Edit</button>
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">
+                      Price: ${sub.priceDisplay} | ${sub.features.join(', ')}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+          <div class="product-card-footer">
+            <button class="btn btn-sm btn-danger" onclick="openDeleteModal('${product.id}')">
+              Delete
+            </button>
+            <button class="btn btn-sm btn-secondary" onclick="openEditModal('${product.id}')">
+              Edit Details
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter Products
+    function filterProducts(filter) {
+      currentFilter = filter;
+      
+      // Update active state
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      document.querySelector(`[data-filter="${filter}"]`)?.classList.add('active');
+      
+      // Update title
+      const titles = {
+        'all': 'All Products',
+        'thermos': 'Thermos Series',
+        'outdoor': 'Outdoor Series',
+        'office': 'Office Series',
+        'kids': 'Kids Series',
+        'other': 'Accessories'
+      };
+      
+      if (!titles[filter]) {
+        const product = productsData.products.find(p => p.series === filter);
+        document.getElementById('current-filter-title').textContent = product ? product.seriesName : 'Products';
+      } else {
+        document.getElementById('current-filter-title').textContent = titles[filter];
+      }
+      
+      renderProducts();
+    }
+
+    // Update Stats
+    function updateStats() {
+      document.getElementById('stat-products').textContent = productsData.products.length;
+      document.getElementById('stat-series').textContent = new Set(productsData.products.map(p => p.series)).size;
+      
+      const prices = productsData.products.flatMap(p => [p.priceMin, p.priceMax]);
+      document.getElementById('stat-min-price').textContent = '$' + Math.min(...prices);
+      document.getElementById('stat-max-price').textContent = '$' + Math.max(...prices);
+    }
+
+    // Update Product Field
+    function updateProduct(productId, field, value) {
+      const product = productsData.products.find(p => p.id === productId);
+      if (product) {
+        product[field] = value;
+        
+        // Update price display
+        if (field === 'priceMin' || field === 'priceMax') {
+          product.priceDisplay = `$${product.priceMin}-${product.priceMax}`;
+        }
+      }
+    }
+
+    // Features Management
+    function addFeature(productId, feature) {
+      feature = feature.trim();
+      if (!feature) return;
+      
+      const product = productsData.products.find(p => p.id === productId);
+      if (product && !product.features.includes(feature)) {
+        product.features.push(feature);
+        renderProducts();
+      }
+    }
+
+    function removeFeature(productId, index) {
+      const product = productsData.products.find(p => p.id === productId);
+      if (product) {
+        product.features.splice(index, 1);
+        renderProducts();
+      }
+    }
+
+    // Modal Functions
+    function openAddProductModal() {
+      document.getElementById('modal-title').textContent = 'Add Product';
+      document.getElementById('product-form').reset();
+      document.getElementById('product-id').value = '';
+      document.getElementById('is-new-product').value = 'true';
+      currentFeatures = [];
+      renderFeatureTags();
+      document.getElementById('product-modal').classList.add('active');
+    }
+
+    function openEditModal(productId) {
+      const product = productsData.products.find(p => p.id === productId);
+      if (!product) return;
+      
+      document.getElementById('modal-title').textContent = 'Edit Product';
+      document.getElementById('product-id').value = product.id;
+      document.getElementById('is-new-product').value = 'false';
+      document.getElementById('product-series').value = product.series;
+      document.getElementById('product-series-name').value = product.seriesName;
+      document.getElementById('product-title').value = product.title;
+      document.getElementById('product-description').value = product.description;
+      document.getElementById('product-price-min').value = product.priceMin;
+      document.getElementById('product-price-max').value = product.priceMax;
+      document.getElementById('product-category').value = product.category;
+      document.getElementById('product-slug').value = product.slug;
+      document.getElementById('product-main-image').value = product.mainImage;
+      
+      currentFeatures = [...product.features];
+      renderFeatureTags();
+      
+      // Set badge
+      document.querySelectorAll('.badge-option').forEach(opt => {
+        opt.classList.toggle('selected', opt.dataset.badge === (product.badge || ''));
+      });
+      
+      updateMainImagePreview();
+      document.getElementById('product-modal').classList.add('active');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.remove('active');
+    }
+
+    function renderFeatureTags() {
+      const container = document.getElementById('features-tags');
+      const input = document.getElementById('feature-input');
+      container.innerHTML = currentFeatures.map((f, i) => `
+        <span class="tag">
+          ${f}
+          <span class="tag-remove" onclick="removeModalFeature(${i})">&times;</span>
+        </span>
+      `).join('');
+      container.appendChild(input);
+    }
+
+    function removeModalFeature(index) {
+      currentFeatures.splice(index, 1);
+      renderFeatureTags();
+    }
+
+    function updateMainImagePreview() {
+      const path = document.getElementById('product-main-image').value;
+      const preview = document.getElementById('main-image-preview');
+      if (path) {
+        preview.innerHTML = `<img src="${path}" alt="Preview" onerror="this.parentElement.innerHTML='<div class=image-preview-error>Image not found</div>'">`;
+      } else {
+        preview.innerHTML = '';
+      }
+    }
+
+    // Badge Selection
+    document.querySelectorAll('.badge-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        if (this.closest('#badge-select')) {
+          document.querySelectorAll('#badge-select .badge-option').forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+        }
+      });
+    });
+
+    // Main Image Preview
+    document.getElementById('product-main-image').addEventListener('input', updateMainImagePreview);
+
+    // Feature Input
+    document.getElementById('feature-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const value = this.value.trim();
+        if (value && !currentFeatures.includes(value)) {
+          currentFeatures.push(value);
+          renderFeatureTags();
+        }
+        this.value = '';
+      }
+    });
+
+    // Save Product
+    function saveProduct() {
+      const isNew = document.getElementById('is-new-product').value === 'true';
+      const productId = document.getElementById('product-id').value;
+      const badge = document.querySelector('#badge-select .badge-option.selected')?.dataset.badge || '';
+      
+      const productData = {
+        series: document.getElementById('product-series').value,
+        seriesName: document.getElementById('product-series-name').value,
+        title: document.getElementById('product-title').value,
+        description: document.getElementById('product-description').value,
+        priceMin: parseInt(document.getElementById('product-price-min').value),
+        priceMax: parseInt(document.getElementById('product-price-max').value),
+        category: document.getElementById('product-category').value,
+        slug: document.getElementById('product-slug').value,
+        mainImage: document.getElementById('product-main-image').value,
+        badge: badge,
+        features: currentFeatures,
+        priceDisplay: `$${document.getElementById('product-price-min').value}-${document.getElementById('product-price-max').value}`
+      };
+
+      if (isNew) {
+        productData.id = productData.slug;
+        productData.detailImages = [];
+        productData.specs = {};
+        productData.subProducts = [];
+        productsData.products.push(productData);
+        showToast('Product added successfully!', 'success');
+      } else {
+        const index = productsData.products.findIndex(p => p.id === productId);
+        if (index !== -1) {
+          productsData.products[index] = { ...productsData.products[index], ...productData };
+          showToast('Product updated successfully!', 'success');
+        }
+      }
+
+      closeProductModal();
+      renderSidebar();
+      renderProducts();
+      updateStats();
+    }
+
+    // Edit Sub-Product (placeholder - simplified)
+    function editSubProduct(productId, subProductId) {
+      showToast('Sub-product editing coming soon!', 'warning');
+    }
+
+    // Delete Modal
+    function openDeleteModal(productId) {
+      deleteProductId = productId;
+      const product = productsData.products.find(p => p.id === productId);
+      document.getElementById('delete-product-name').textContent = product ? product.title : '';
+      document.getElementById('delete-modal').classList.add('active');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('delete-modal').classList.remove('active');
+      deleteProductId = null;
+    }
+
+    function confirmDelete() {
+      if (deleteProductId) {
+        productsData.products = productsData.products.filter(p => p.id !== deleteProductId);
+        showToast('Product deleted!', 'success');
+        renderSidebar();
+        renderProducts();
+        updateStats();
+      }
+      closeDeleteModal();
+    }
+
+    // Save Changes
+    async function saveChanges() {
+      showLoading();
+      try {
+        const response = await fetch('/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productsData)
+        });
+        
+        if (response.ok) {
+          showToast('Changes saved successfully!', 'success');
+        } else {
+          throw new Error('Failed to save');
+        }
+      } catch (error) {
+        console.error('Save error:', error);
+        showToast('Failed to save. Using fallback method...', 'warning');
+        
+        // Fallback: create download
+        const blob = new Blob([JSON.stringify(productsData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'products.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Download products.json and replace manually', 'warning');
+      }
+      hideLoading();
+    }
+
+    // Export JSON
+    function exportJSON() {
+      const blob = new Blob([JSON.stringify(productsData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'products.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('JSON file downloaded!', 'success');
+    }
+
+    // Import JSON
+    function importJSON() {
+      document.getElementById('import-file').click();
+    }
+
+    document.getElementById('import-file').addEventListener('change', async function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      try {
+        const text = await file.text();
+        const data = JSON.parse(text);
+        
+        if (data.products && Array.isArray(data.products)) {
+          productsData = data;
+          await fetch('/api/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(productsData)
+          }).catch(() => {});
+          
+          renderSidebar();
+          renderProducts();
+          updateStats();
+          showToast('Products imported successfully!', 'success');
+        } else {
+          throw new Error('Invalid format');
+        }
+      } catch (error) {
+        showToast('Invalid JSON file', 'error');
+      }
+      
+      this.value = '';
+    });
+
+    // Build Website
+    async function buildWebsite() {
+      showLoading();
+      showToast('Building website... This may take a moment.', 'warning');
+      
+      try {
+        const response = await fetch('/api/build', { method: 'POST' });
+        if (response.ok) {
+          showToast('Website generated successfully!', 'success');
+        } else {
+          throw new Error('Build failed');
+        }
+      } catch (error) {
+        console.error('Build error:', error);
+        showToast('Build failed. Check console for details.', 'error');
+      }
+      
+      hideLoading();
+    }
+
+    // Toast
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `
+        <span>${type === 'success' ? '✓' : type === 'error' ? '✗' : '!'}</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      
+      setTimeout(() => toast.remove(), 4000);
+    }
+
+    // Loading
+    function showLoading() {
+      document.getElementById('loading-overlay').classList.add('active');
+    }
+
+    function hideLoading() {
+      document.getElementById('loading-overlay').classList.remove('active');
+    }
+
+    // Initialize
+    init();
+  </script>
+</body>
+</html>

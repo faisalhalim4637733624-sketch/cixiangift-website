@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="GIFT Titanium">
+  <rect width="200" height="200" rx="24" fill="#0A0A0A"/>
+  <rect x="6" y="6" width="188" height="188" rx="20" fill="none" stroke="#C0A062" stroke-width="3"/>
+  <text x="100" y="95" text-anchor="middle" fill="#C0A062" font-family="Georgia, serif" font-size="52" font-weight="600">GIFT</text>
+  <text x="100" y="130" text-anchor="middle" fill="#DCDCDC" font-family="system-ui, sans-serif" font-size="18" letter-spacing="4">PURE TITANIUM</text>
+</svg>

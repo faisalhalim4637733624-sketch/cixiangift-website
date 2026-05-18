@@ -1,0 +1,46 @@
+[build]
+  publish = "."
+
+# Clean URLs — main pages
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/products"
+  to = "/products.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+# Product detail pages: /products/titanium-thermos → products/titanium-thermos.html
+[[redirects]]
+  from = "/products/:slug"
+  to = "/products/:slug.html"
+  status = 200
+
+# Blog articles: /blog/article-slug → blog/article-slug.html
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/blog/:slug.html"
+  status = 200
+
+# Admin panel
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
