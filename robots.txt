@@ -1,0 +1,15 @@
+# GIFT Titanium Website - robots.txt
+# https://www.gifttitanium.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.gifttitanium.com/sitemap.xml
+
+# Crawl-delay (optional, be considerate to the server)
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+Disallow: /admin/
+Disallow: /private/
