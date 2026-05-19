@@ -867,8 +867,14 @@
           </div>
           
           <div class="form-group">
-            <label class="form-label">Main Image Path</label>
-            <input type="text" class="form-input" id="product-main-image" placeholder="images/g1-thermos-main.jpg">
+            <label class="form-label">Main Image</label>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+              <input type="text" class="form-input" id="product-main-image" placeholder="images/g1-thermos-main.jpg" style="flex:1;">
+              <label for="upload-main-image" style="cursor:pointer;padding:8px 14px;background:#4f6ef7;color:#fff;border-radius:6px;font-size:13px;white-space:nowrap;">
+                📷 上传图片
+              </label>
+              <input type="file" id="upload-main-image" accept="image/*" style="display:none;" onchange="handleImageUpload(this, 'product-main-image', 'main-image-preview')">
+            </div>
             <div class="image-preview" id="main-image-preview"></div>
           </div>
           
@@ -1058,12 +1064,21 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Main Image Path</label>
-              <input type="text" class="form-input form-input-sm" value="${product.mainImage}"
-                     onchange="updateProduct('${product.id}', 'mainImage', this.value)">
+              <label class="form-label">Main Image</label>
+              <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+                <input type="text" class="form-input form-input-sm" value="${product.mainImage}"
+                       id="img-input-${product.id}"
+                       onchange="updateProduct('${product.id}', 'mainImage', this.value)">
+                <label for="upload-${product.id}" style="cursor:pointer;padding:6px 10px;background:#4f6ef7;color:#fff;border-radius:6px;font-size:12px;white-space:nowrap;">
+                  📷 上传
+                </label>
+                <input type="file" id="upload-${product.id}" accept="image/*" style="display:none;"
+                       onchange="handleImageUpload(this, 'img-input-${product.id}', 'img-preview-${product.id}', '${product.id}')">
+              </div>
               ${product.mainImage ? `
-                <div class="image-preview">
+                <div class="image-preview" id="img-preview-${product.id}">
                   <img src="${product.mainImage}" alt="${product.title}" onerror="this.parentElement.innerHTML='<div class=image-preview-error>Image not found</div>'">
+                </div>` : `<div class="image-preview" id="img-preview-${product.id}"></div>`}
                 </div>
               ` : ''}
             </div>
@@ -1381,6 +1396,45 @@
         showToast('Download products.json and replace manually', 'warning');
       }
       hideLoading();
+    }
+
+    // Image Upload Handler
+    function handleImageUpload(input, inputId, previewId, productId) {
+      const file = input.files[0];
+      if (!file) return;
+
+      // Check file size (max 2MB)
+      if (file.size > 2 * 1024 * 1024) {
+        showToast('图片太大，请上传2MB以内的图片', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+
+        // Update input field
+        const inputEl = document.getElementById(inputId);
+        if (inputEl) {
+          inputEl.value = base64;
+          // Trigger change event to update product data
+          inputEl.dispatchEvent(new Event('change'));
+        }
+
+        // Update preview
+        const previewEl = document.getElementById(previewId);
+        if (previewEl) {
+          previewEl.innerHTML = `<img src="${base64}" alt="Preview" style="max-width:100%;border-radius:6px;">`;
+        }
+
+        // If productId provided, update product data directly
+        if (productId) {
+          updateProduct(productId, 'mainImage', base64);
+        }
+
+        showToast('图片上传成功！', 'success');
+      };
+      reader.readAsDataURL(file);
     }
 
     // Export JSON
