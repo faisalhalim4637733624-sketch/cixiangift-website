@@ -1,11 +1,11 @@
 # GIFT Titanium Website - robots.txt
-# https://www.gifttitanium.com
+# https://cixiangift.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.gifttitanium.com/sitemap.xml
+Sitemap: https://cixiangift.com/sitemap.xml
 
 # Crawl-delay (optional, be considerate to the server)
 Crawl-delay: 1

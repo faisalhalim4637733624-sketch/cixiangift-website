@@ -1,0 +1,8 @@
+# Cloudflare Pages — clean URLs (same rules as netlify.toml)
+/products          /products.html           200
+/about             /about.html              200
+/contact           /contact.html            200
+/blog              /blog.html               200
+/admin             /admin.html              200
+/products/*        /products/:splat.html    200
+/blog/*            /blog/:splat.html        200
