@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script>if(location.protocol==="http:"){location.replace("https:"+window.location.href.substring(window.location.protocol.length))}</script>
   <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pure Titanium Drinkware Products | Wholesale Titanium Cups, Thermos & Bottles | GIFT Titanium</title>
   <meta name="description" content="Browse our complete range of pure titanium drinkware: thermos cups, outdoor flasks, office tea/coffee sets, kids cups, and food containers. Wholesale B2B pricing available.">
   <meta name="keywords" content="titanium cup wholesale, pure titanium water bottle, titanium thermos supplier, bulk titanium cups, titanium drinkware manufacturer">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.gifttitanium.com/products">
+  <link rel="canonical" href="https://cixiangift.com/products">
   <meta property="og:title" content="Pure Titanium Drinkware Products | GIFT Titanium">
   <meta property="og:description" content="Complete range of pure titanium drinkware for B2B wholesale. Thermos, flasks, office cups, kids bottles.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.gifttitanium.com/products">
+  <meta property="og:url" content="https://cixiangift.com/products">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,11 +112,11 @@
         <div class="footer-column">
           <h4>Products</h4>
           <ul class="footer-links">
-            <li><a href="#thermos">Titanium Thermos</a></li>
-            <li><a href="#outdoor">Outdoor Flask</a></li>
-            <li><a href="#office">Office Tea &amp; Coffee</a></li>
-            <li><a href="#kids">Kids Titanium</a></li>
-            <li><a href="#">All Products</a></li>
+            <li><a href="products.html?filter=thermos">Titanium Thermos</a></li>
+            <li><a href="products.html?filter=outdoor">Outdoor Flask</a></li>
+            <li><a href="products.html?filter=office">Office Tea &amp; Coffee</a></li>
+            <li><a href="products.html?filter=kids">Kids Titanium</a></li>
+            <li><a href="products.html">All Products</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -130,18 +131,16 @@
         <div class="footer-column">
           <h4>Contact</h4>
           <ul class="footer-links">
-            <li>📧 faisalhalim4637733624@gmail.com</li>
+            <li>📧 contact@cixiangift.com.cn</li>
             <li>📱 +86 13085622387</li>
-            <li>📍 Hangzhou, Zhejiang, China</li>
+            <li>📍 Tongxiang, Jiaxing, Zhejiang, China</li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copyright">© 2025 GIFT Titanium. All rights reserved.</p>
+        <p class="footer-copyright">© 2026 Cixian Intelligent Technology (Jiaxing) Co., Ltd. All rights reserved.</p>
         <div class="footer-social">
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Instagram">📷</a>
+          <a href="mailto:contact@cixiangift.com.cn" aria-label="Email">✉️</a>
         </div>
       </div>
     </div>
@@ -167,12 +166,12 @@
         </div>
         <button class="quote-modal-close" onclick="closeQuoteModal()">×</button>
       </div>
-      <form id="quote-form" action="https://formsubmit.co/faisalhalim4637733624@gmail.com" method="POST">
+      <form id="quote-form" action="https://formsubmit.co/contact@cixiangift.com.cn" method="POST">
         <!-- FormSubmit Hidden Fields -->
         <input type="hidden" name="_subject" value="GIFT Titanium - Quote Request">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://www.gifttitanium.com/products.html">
+        <input type="hidden" name="_next" value="https://cixiangift.com/products.html">
         <input type="hidden" name="_autoresponse" value="Thank you for your quote request! We will send you a detailed quote within 24 hours. - GIFT Titanium Team">
         <input type="hidden" name="product" id="quote-product">
         
@@ -232,7 +231,17 @@
   (function () {
     var grid = document.getElementById('product-grid');
     var filterBtns = document.querySelectorAll('.filter-btn');
-    var currentFilter = 'all';
+    var params = new URLSearchParams(window.location.search);
+    var currentFilter = params.get('filter') || 'all';
+    if (currentFilter && currentFilter !== 'all') {
+      filterBtns.forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-filter') === currentFilter);
+      });
+    }
+
+    function priceLabel(display) {
+      return 'FOB';
+    }
 
     // 渲染产品卡片
     function renderProducts(products, filter) {
@@ -241,11 +250,23 @@
       if (filtered.length === 0) {
         html = '<p style="color:#999;text-align:center;padding:2rem;grid-column:1/-1;">No products found.</p>';
       } else {
-        filtered.forEach(function(p) {
+        function detailSlug(p, idx) {
+          var s = (p.slug || '').trim();
+          if (s) return s;
+          var img = p.mainImage || '';
+          var stem = img.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
+          var slug = stem.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+          return slug || ('line-' + idx);
+        }
+        filtered.forEach(function(p, idx) {
           var badge = p.badge ? '<span class="product-card-badge">' + p.badge + '</span>' : '';
           var features = (p.features || []).map(function(f){
             return '<span class="product-feature">' + f + '</span>';
           }).join('');
+          var cardTitle = (p.seriesName && p.seriesName.trim()) ? p.seriesName : ((p.title || '').trim() || 'Product');
+          var desc = (p.description || '').trim();
+          var descShort = desc.length > 120 ? desc.substring(0, 120) + '...' : (desc || 'Wholesale pure titanium drinkware — request a quote for FOB and MOQ.');
+          var slug = detailSlug(p, idx);
           html += '<div class="product-card product-item" data-category="' + p.category + '" data-animate>' +
             '<div class="product-card-image">' +
               '<img src="' + p.mainImage + '" alt="' + p.title + '" loading="lazy">' +
@@ -253,12 +274,12 @@
             '</div>' +
             '<div class="product-card-content">' +
               '<span class="product-card-category">' + p.series + ' Series</span>' +
-              '<h3 class="product-card-title">' + p.seriesName + '</h3>' +
-              '<p class="product-card-description">' + p.description.substring(0, 120) + '...</p>' +
+              '<h3 class="product-card-title">' + cardTitle + '</h3>' +
+              '<p class="product-card-description">' + descShort + '</p>' +
               '<div class="product-card-features">' + features + '</div>' +
               '<div class="product-card-footer">' +
-                '<span class="product-card-price">FOB <strong>' + p.priceDisplay + '</strong></span>' +
-                '<a href="products/' + p.slug + '.html" class="btn btn-ghost btn-sm">Details</a>' +
+                '<span class="product-card-price">' + priceLabel(p.priceDisplay) + ' <strong>' + p.priceDisplay + '</strong></span>' +
+                '<a href="products/' + slug + '.html" class="btn btn-ghost btn-sm">Details</a>' +
               '</div>' +
             '</div>' +
           '</div>';

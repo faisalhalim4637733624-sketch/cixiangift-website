@@ -1,200 +1,75 @@
 {
   "products": [
     {
-      "id": "thermos-jiaren",
-      "series": "佳人",
-      "seriesName": "Jiaren Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Jiaren Pure Titanium Double-Wall Thermos",
-      "description": "Elegant double-wall pure titanium thermos. Available in 330ml and 450ml. Colors: Ice Silver, Ocean Blue, Pink, Gold. Dealer price from ¥260.",
-      "priceMin": 260,
-      "priceMax": 270,
-      "priceDisplay": "¥260-270",
-      "badge": "Bestseller",
-      "features": ["Ti>99.8%", "330-450ml", "Double Wall", "Gift Box"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg", "images/g1-detail-1.jpg", "images/g1-detail-2.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "330ml / 450ml",
-        "colors": "Ice Silver, Ocean Blue, Pink, Gold",
-        "weight": "260-290g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
-      "id": "thermos-nvshen",
-      "series": "女神",
-      "seriesName": "Nvshen Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Nvshen Pure Titanium Thermos",
-      "description": "Compact 260ml pure titanium thermos. 6 colors available: Ice Silver, Cherry Pink, Sapphire Blue, Peacock Green, Amber Yellow, Lavender Purple. Dealer price from ¥170.",
-      "priceMin": 170,
-      "priceMax": 180,
-      "priceDisplay": "¥170-180",
-      "badge": "",
-      "features": ["Ti>99.8%", "260ml", "6 Colors", "Gift Box"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "260ml",
-        "colors": "Ice Silver, Cherry Pink, Sapphire Blue, Peacock Green, Amber Yellow, Lavender Purple",
-        "weight": "160g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
-      "id": "thermos-letu",
-      "series": "乐途",
-      "seriesName": "Letu Pure Titanium Travel Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Letu Pure Titanium Double-Wall Travel Thermos",
-      "description": "Large 630ml double-wall titanium thermos for travel. 5 colors: Emerald Green, Ocean Blue, Pink, Gradient, Silver. Dealer price ¥276.",
-      "priceMin": 276,
-      "priceMax": 276,
-      "priceDisplay": "¥276",
-      "badge": "Travel",
-      "features": ["Ti>99.8%", "630ml", "5 Colors", "Double Wall"],
-      "mainImage": "images/g1-detail-1.jpg",
-      "detailImages": ["images/g1-detail-1.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "630ml",
-        "colors": "Emerald Green, Ocean Blue, Pink, Gradient, Silver",
-        "weight": "287g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
-      "id": "thermos-gift",
-      "series": "GIFT",
-      "seriesName": "GIFT Flagship Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "GIFT Flagship Pure Titanium Double-Wall Thermos",
-      "description": "Our flagship GIFT branded thermos, 400ml. 6 colors: Silver, Ice Silver, Peacock Green, Sky Blue, Violet, Gentleman Black. Dealer price from ¥300.",
-      "priceMin": 300,
-      "priceMax": 350,
-      "priceDisplay": "¥300-350",
-      "badge": "Flagship",
-      "features": ["Ti>99.8%", "400ml", "6 Colors", "Luxury Box"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "400ml",
-        "colors": "Silver, Ice Silver, Peacock Green, Sky Blue, Violet, Gentleman Black",
-        "weight": "285g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Luxury gift box included"
-      }
-    },
-    {
-      "id": "thermos-panda",
-      "series": "PANDA",
-      "seriesName": "PANDA Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "PANDA Pure Titanium Double-Wall Thermos",
-      "description": "Premium PANDA series 500ml double-wall thermos. 4 colors: Silver, Ocean Blue, Peacock Green, Pink. Dealer price from ¥350.",
-      "priceMin": 350,
-      "priceMax": 370,
-      "priceDisplay": "¥350-370",
-      "badge": "Premium",
-      "features": ["Ti>99.8%", "500ml", "4 Colors", "Double Wall"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "500ml",
-        "colors": "Silver, Ocean Blue, Peacock Green, Pink",
-        "weight": "320g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
       "id": "thermos-daphne",
       "series": "Daphne",
-      "seriesName": "Daphne Pure Titanium Thermos",
+      "seriesName": "Daphne Pure Titanium Insulated Mug",
       "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Daphne Pure Titanium Thermos",
-      "description": "Elegant Daphne series 320ml thermos. 3 colors: Sky Blue, Emerald Green, Cherry Pink. Dealer price ¥270.",
-      "priceMin": 270,
-      "priceMax": 270,
-      "priceDisplay": "¥270",
+      "slug": "titanium-thermos-daphne",
+      "title": "Daphne Pure Titanium Insulated Mug",
+      "description": "Elegant Daphne series 320ml thermos. 3 colors: Sky Blue, Emerald Green, Cherry Pink.",
+      "priceMin": 40,
+      "priceMax": 45,
+      "priceDisplay": "$40-45",
       "badge": "",
-      "features": ["Ti>99.8%", "320ml", "3 Colors", "Gift Box"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
+      "features": [
+        "Ti>99.8%",
+        "320ml",
+        "3 Colors",
+        "Gift Box"
+      ],
+      "mainImage": "images/thermos-daphne-main.jpeg",
+      "detailImages": [
+        "images/thermos-daphne-detail-1.jpg",
+        "images/thermos-daphne-detail-2.jpg",
+        "images/thermos-daphne-sku-emerald.jpg",
+        "images/thermos-daphne-sku-pink.jpg"
+      ],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "320ml",
         "colors": "Sky Blue, Emerald Green, Cherry Pink",
-        "weight": "251g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$40"
     },
     {
-      "id": "thermos-jinyu",
-      "series": "金鱼",
-      "seriesName": "Jinyu Pure Titanium Thermos",
+      "id": "thermos-gift",
+      "series": "GIFT",
+      "seriesName": "Premium Pure Titanium Insulated Flask",
       "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Jinyu Pure Titanium Thermos",
-      "description": "400ml Jinyu series thermos. 5 colors: Silver, Pink, Ocean Blue, Peacock Green, Colorful. Dealer price from ¥210.",
-      "priceMin": 210,
-      "priceMax": 220,
-      "priceDisplay": "¥210-220",
-      "badge": "",
-      "features": ["Ti>99.8%", "400ml", "5 Colors", "Gift Box"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
+      "slug": "titanium-thermos-gift",
+      "title": "Premium Pure Titanium Insulated Flask",
+      "description": "Flagship GIFT branded 400ml double-wall thermos. 6 colors: Silver, Ice Silver, Peacock Green, Sky Blue, Violet, Gentleman Black.",
+      "priceMin": 120,
+      "priceMax": 140,
+      "priceDisplay": "$120-140",
+      "badge": "Flagship",
+      "features": [
+        "Ti>99.8%",
+        "400ml",
+        "6 Colors",
+        "Luxury Box"
+      ],
+      "mainImage": "images/thermos-gift-main.jpg",
+      "detailImages": [
+        "images/thermos-gift-detail-1.jpg",
+        "images/thermos-gift-detail-2.jpg",
+        "images/thermos-gift-detail-3.jpg",
+        "images/thermos-gift-detail-4.jpg",
+        "images/thermos-gift-sku-silver.jpg"
+      ],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "400ml",
-        "colors": "Silver, Pink, Ocean Blue, Peacock Green, Colorful",
-        "weight": "282g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
-      "id": "thermos-zuanshi",
-      "series": "钻石",
-      "seriesName": "Zuanshi Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Zuanshi Pure Titanium Thermos",
-      "description": "500ml Diamond series thermos. 2 colors: Ocean Blue, Silver. Dealer price from ¥220.",
-      "priceMin": 220,
-      "priceMax": 230,
-      "priceDisplay": "¥220-230",
-      "badge": "",
-      "features": ["Ti>99.8%", "500ml", "2 Colors", "Gift Box"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "500ml",
-        "colors": "Ocean Blue, Silver",
-        "weight": "290g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
+        "colors": "Silver, Ice Silver, Peacock Green, Sky Blue, Violet, Gentleman Black",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$168"
     },
     {
       "id": "thermos-huazai",
-      "series": "华仔",
+      "series": "Huazhai",
       "seriesName": "Huazai Pure Titanium Thermos",
       "category": "thermos",
       "slug": "titanium-thermos",
@@ -202,11 +77,18 @@
       "description": "500ml classic design thermos. 2 colors: Silver, Galaxy Blue. Dealer price from ¥260.",
       "priceMin": 260,
       "priceMax": 270,
-      "priceDisplay": "¥260-270",
+      "priceDisplay": "$50-60",
       "badge": "",
-      "features": ["Ti>99.8%", "500ml", "Classic Design", "Gift Box"],
+      "features": [
+        "Ti>99.8%",
+        "500ml",
+        "Classic Design",
+        "Gift Box"
+      ],
       "mainImage": "images/g1-detail-2.jpg",
-      "detailImages": ["images/g1-detail-2.jpg"],
+      "detailImages": [
+        "images/g1-detail-2.jpg"
+      ],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "500ml",
@@ -217,56 +99,240 @@
       }
     },
     {
-      "id": "thermos-nannan",
-      "series": "囡囡",
-      "seriesName": "Nannan Pure Titanium Thermos",
+      "id": "thermos-jiaren",
+      "series": "Jiaren",
+      "seriesName": "Jiaren Pure Titanium Thermos",
       "category": "thermos",
       "slug": "titanium-thermos",
-      "title": "Nannan Pure Titanium Thermos",
-      "description": "550ml Nannan series. 2 colors: Sky Blue, Nebula Purple. Dealer price ¥260.",
+      "title": "Jiaren Pure Titanium Double-Wall Thermos",
+      "description": "Elegant double-wall pure titanium thermos. Available in 330ml and 450ml. Colors: Ice Silver, Ocean Blue, Pink, Gold. Dealer price from ¥260.",
       "priceMin": 260,
-      "priceMax": 260,
-      "priceDisplay": "¥260",
-      "badge": "",
-      "features": ["Ti>99.8%", "550ml", "2 Colors", "Gift Box"],
+      "priceMax": 270,
+      "priceDisplay": "$120-280",
+      "badge": "Bestseller",
+      "features": [
+        "Ti>99.8%",
+        "330-450ml",
+        "Double Wall",
+        "Gift Box"
+      ],
       "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
+      "detailImages": [
+        "images/g1-thermos-main.jpg",
+        "images/g1-detail-1.jpg",
+        "images/g1-detail-2.jpg"
+      ],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "330ml / 450ml",
+        "colors": "Ice Silver, Ocean Blue, Pink, Gold",
+        "weight": "260-290g",
+        "certifications": "FDA, LFGB",
+        "packaging": "Premium gift box included"
+      }
+    },
+    {
+      "id": "thermos-jinyu",
+      "series": "Goldfish",
+      "seriesName": "Goldfish Pure Titanium Insulated Mug",
+      "category": "thermos",
+      "slug": "titanium-thermos-jinyu",
+      "title": "Goldfish Pure Titanium Insulated Mug",
+      "description": "400ml Jinyu series thermos. 5 colors: Silver, Pink, Ocean Blue, Peacock Green, Colorful.",
+      "priceMin": 40,
+      "priceMax": 45,
+      "priceDisplay": "$40-45",
+      "badge": "",
+      "features": [
+        "Ti>99.8%",
+        "400ml",
+        "5 Colors",
+        "Gift Box"
+      ],
+      "mainImage": "images/thermos-jinyu-main.jpg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "400ml",
+        "colors": "Silver, Pink, Ocean Blue, Peacock Green, Colorful",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$40"
+    },
+    {
+      "id": "thermos-letu",
+      "series": "Letu",
+      "seriesName": "Letu Double-Layer Pure Titanium Insulated Mug",
+      "category": "thermos",
+      "slug": "titanium-thermos-letu",
+      "title": "Letu Double-Layer Pure Titanium Insulated Mug",
+      "description": "Large 630ml double-wall titanium thermos. 5 colors: Emerald Green, Ocean Blue, Pink, Gradient, Silver.",
+      "priceMin": 50,
+      "priceMax": 55,
+      "priceDisplay": "$50-55",
+      "badge": "Travel",
+      "features": [
+        "Ti>99.8%",
+        "630ml",
+        "5 Colors",
+        "Double Wall"
+      ],
+      "mainImage": "images/thermos-letu-main.jpg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "630ml",
+        "colors": "Emerald Green, Ocean Blue, Pink, Gradient, Silver",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$50"
+    },
+    {
+      "id": "thermos-nannan",
+      "series": "Nannan ",
+      "seriesName": "Nannan Pure Titanium Insulated Mug",
+      "category": "thermos",
+      "slug": "titanium-thermos-nannan",
+      "title": "Nannan Pure Titanium Insulated Mug",
+      "description": "Cute Nannan series 550ml insulated mug for daily use. 2 colors: Sky Blue, Nebula Purple. Lightweight and antibacterial.",
+      "priceMin": 45,
+      "priceMax": 52,
+      "priceDisplay": "$45-52",
+      "badge": "",
+      "features": [
+        "Ti>99.8%",
+        "550ml",
+        "2 Colors",
+        "Gift Box"
+      ],
+      "mainImage": "images/thermos-nannan-main.jpg",
+      "detailImages": [],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "550ml",
         "colors": "Sky Blue, Nebula Purple",
-        "weight": "373g",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$65"
+    },
+    {
+      "id": "thermos-nvshen",
+      "series": "Goddess",
+      "seriesName": "Goddess Pure Titanium Insulated Mug",
+      "category": "thermos",
+      "slug": "titanium-thermos-nvshen",
+      "title": "Goddess Pure Titanium Insulated Mug",
+      "description": "Compact 260ml pure titanium thermos. 6 colors: Ice Silver, Cherry Pink, Sapphire Blue, Peacock Green, Amber Yellow, Lavender Purple.",
+      "priceMin": 50,
+      "priceMax": 55,
+      "priceDisplay": "$50-55",
+      "badge": "",
+      "features": [
+        "Ti>99.8%",
+        "260ml",
+        "6 Colors",
+        "Gift Box"
+      ],
+      "mainImage": "images/thermos-nvshen-main.jpeg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "260ml",
+        "colors": "Ice Silver, Cherry Pink, Sapphire Blue, Peacock Green, Amber Yellow, Lavender Purple",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$50"
+    },
+    {
+      "id": "thermos-panda",
+      "series": "PANDA",
+      "seriesName": "PANDA Pure Titanium Double-Wall Insulated Mug",
+      "category": "thermos",
+      "slug": "titanium-thermos-panda",
+      "title": "PANDA Pure Titanium Double-Wall Insulated Mug",
+      "description": "Premium PANDA series 500ml double-wall thermos. 4 colors: Silver, Ocean Blue, Pearl White, Rose Gold. Built-in tea filter, gift box included.",
+      "priceMin": 45,
+      "priceMax": 49,
+      "priceDisplay": "$45-49",
+      "badge": "Premium",
+      "features": [
+        "Ti>99.8%",
+        "500ml",
+        "4 Colors",
+        "Double Wall"
+      ],
+      "mainImage": "images/thermos-panda-main.jpeg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "500ml",
+        "colors": "Silver, Ocean Blue, Peacock Green, Pink",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$45"
+    },
+    {
+      "id": "thermos-zuanshi",
+      "series": "Diamond",
+      "seriesName": "Zuanshi Pure Titanium Thermos",
+      "category": "thermos",
+      "slug": "titanium-thermos",
+      "title": "Zuanshi Pure Titanium Thermos",
+      "description": "500ml Diamond series thermos. 2 colors: Ocean Blue, Silver. Dealer price from ¥220.",
+      "priceMin": 220,
+      "priceMax": 230,
+      "priceDisplay": "$50-55",
+      "badge": "",
+      "features": [
+        "Ti>99.8%",
+        "500ml",
+        "2 Colors",
+        "Gift Box"
+      ],
+      "mainImage": "images/g1-thermos-main.jpg",
+      "detailImages": [
+        "images/g1-thermos-main.jpg"
+      ],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "500ml",
+        "colors": "Ocean Blue, Silver",
+        "weight": "290g",
         "certifications": "FDA, LFGB",
         "packaging": "Premium gift box included"
       }
     },
     {
       "id": "outdoor-explorer",
-      "series": "探险者",
-      "seriesName": "Explorer Pure Titanium Outdoor Flask",
+      "series": "Explorer",
+      "seriesName": "Explorer Pure Titanium Outdoor Travel Flask",
       "category": "outdoor",
-      "slug": "outdoor-flask",
-      "title": "Explorer Pure Titanium Outdoor Flask",
-      "description": "Heavy-duty outdoor titanium flask. Available in 1200ml and 1600ml. Colors: Ocean Blue, Silver. Dealer price from ¥520.",
-      "priceMin": 520,
-      "priceMax": 580,
-      "priceDisplay": "¥520-580",
+      "slug": "outdoor-flask-explorer",
+      "title": "Explorer Pure Titanium Outdoor Travel Flask",
+      "description": "Heavy-duty outdoor titanium flask for adventures. 1200ml and 1600ml. Colors: Ocean Blue, Silver. Impact-resistant, vacuum insulated.",
+      "priceMin": 120,
+      "priceMax": 140,
+      "priceDisplay": "$120-140",
       "badge": "Outdoor",
-      "features": ["Ti>99.8%", "1200-1600ml", "Heavy Duty", "Outdoor Ready"],
-      "mainImage": "images/g2-outdoor-main.jpg",
-      "detailImages": ["images/g2-outdoor-main.jpg"],
+      "features": [
+        "Ti>99.8%",
+        "1200-1600ml",
+        "Heavy Duty",
+        "Outdoor Ready"
+      ],
+      "mainImage": "images/outdoor-explorer-main.jpg",
+      "detailImages": [],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "1200ml / 1600ml",
         "colors": "Ocean Blue, Silver",
-        "weight": "725-900g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Retail gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$87"
     },
     {
       "id": "outdoor-zunxiang",
-      "series": "尊享",
+      "series": "Zunxiang",
       "seriesName": "Zunxiang Pure Titanium Premium Flask",
       "category": "outdoor",
       "slug": "outdoor-flask",
@@ -274,11 +340,18 @@
       "description": "Premium 1500ml titanium flask. 4 colors: Silver, Glacier Blue, Gentleman Black, Ice Silver. Dealer price ¥550.",
       "priceMin": 550,
       "priceMax": 550,
-      "priceDisplay": "¥550",
+      "priceDisplay": "$220-500",
       "badge": "Premium",
-      "features": ["Ti>99.8%", "1500ml", "4 Colors", "Premium"],
+      "features": [
+        "Ti>99.8%",
+        "1500ml",
+        "4 Colors",
+        "Premium"
+      ],
       "mainImage": "images/g2-outdoor-main.jpg",
-      "detailImages": ["images/g2-outdoor-main.jpg"],
+      "detailImages": [
+        "images/g2-outdoor-main.jpg"
+      ],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "1500ml",
@@ -290,54 +363,35 @@
     },
     {
       "id": "office-chuanshi",
-      "series": "传世",
-      "seriesName": "Chuanshi Pure Titanium Tea Cup",
+      "series": "Chuanshi ",
+      "seriesName": "Chuanshi Pure Titanium Tea Brewing Mug",
       "category": "office",
-      "slug": "office-tea-coffee",
-      "title": "Chuanshi Pure Titanium Tea Brewing Cup",
-      "description": "Traditional tea brewing titanium cup. Available in 600ml and 1000ml. Colors: Ice Silver, Cherry Pink, Sky Blue, Amber Yellow, Emerald Green. Dealer price from ¥285.",
-      "priceMin": 285,
-      "priceMax": 320,
-      "priceDisplay": "¥285-320",
+      "slug": "office-tea-chuanshi",
+      "title": "Chuanshi Pure Titanium Tea Brewing Mug",
+      "description": "Traditional tea brewing titanium mug with infuser. 600ml and 1000ml. Colors: Ice Silver, Cherry Pink. Slow-brew design for rich flavor.",
+      "priceMin": 50,
+      "priceMax": 60,
+      "priceDisplay": "$50-60",
       "badge": "Tea",
-      "features": ["Ti>99.8%", "600-1000ml", "Tea Brewer", "Business"],
-      "mainImage": "images/g3-office-main.jpg",
-      "detailImages": ["images/g3-office-main.jpg", "images/g3-detail-1.jpg"],
+      "features": [
+        "Ti>99.8%",
+        "600-1000ml",
+        "Tea Brewer",
+        "Business"
+      ],
+      "mainImage": "images/office-chuanshi-main.jpg",
+      "detailImages": [],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "600ml / 1000ml",
         "colors": "Ice Silver, Cherry Pink, Sky Blue, Amber Yellow, Emerald Green",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
-      "id": "office-rongyu",
-      "series": "荣耀",
-      "seriesName": "Rongyu Pure Titanium Tea Cup",
-      "category": "office",
-      "slug": "office-tea-coffee",
-      "title": "Rongyu Pure Titanium Tea Cup",
-      "description": "480ml tea cup. 3 colors: Ice Silver, Sky Blue, Cherry Pink. Dealer price ¥165.",
-      "priceMin": 165,
-      "priceMax": 165,
-      "priceDisplay": "¥165",
-      "badge": "",
-      "features": ["Ti>99.8%", "480ml", "3 Colors", "Tea Cup"],
-      "mainImage": "images/g3-office-main.jpg",
-      "detailImages": ["images/g3-office-main.jpg"],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "480ml",
-        "colors": "Ice Silver, Sky Blue, Cherry Pink",
-        "weight": "260g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$50"
     },
     {
       "id": "office-jueshi",
-      "series": "爵士",
+      "series": "Jueshi",
       "seriesName": "Jueshi Pure Titanium Office Cup",
       "category": "office",
       "slug": "office-tea-coffee",
@@ -345,11 +399,18 @@
       "description": "500ml wide-mouth office cup. 4 colors: Silver, Ice Silver, Sky Blue, Cherry Pink. Dealer price from ¥280.",
       "priceMin": 280,
       "priceMax": 290,
-      "priceDisplay": "¥280-290",
+      "priceDisplay": "$50-60",
       "badge": "Office",
-      "features": ["Ti>99.8%", "500ml", "Wide Mouth", "Business Style"],
+      "features": [
+        "Ti>99.8%",
+        "500ml",
+        "Wide Mouth",
+        "Business Style"
+      ],
       "mainImage": "images/g3-detail-2.jpg",
-      "detailImages": ["images/g3-detail-2.jpg"],
+      "detailImages": [
+        "images/g3-detail-2.jpg"
+      ],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "500ml",
@@ -361,31 +422,63 @@
     },
     {
       "id": "office-mofei",
-      "series": "摩飞",
-      "seriesName": "Mofei Pure Titanium Coffee Cup",
+      "series": "Morphy",
+      "seriesName": "Morphy Pure Titanium Coffee Mug",
       "category": "office",
-      "slug": "office-tea-coffee",
-      "title": "Mofei Pure Titanium Coffee Cup",
-      "description": "535ml wide-mouth coffee cup. 4 colors: Ice Silver, Cherry Pink, Sky Blue, Gradient. Dealer price from ¥190.",
-      "priceMin": 190,
-      "priceMax": 200,
-      "priceDisplay": "¥190-200",
+      "slug": "office-tea-mofei",
+      "title": "Morphy Pure Titanium Coffee Mug",
+      "description": "535ml wide-mouth pure titanium coffee mug. 4 colors: Ice Silver, Cherry Pink, Sky Blue, Gradient. BPA-free, keeps coffee fresh.",
+      "priceMin": 37,
+      "priceMax": 40,
+      "priceDisplay": "$37-40",
       "badge": "Coffee",
-      "features": ["Ti>99.8%", "535ml", "Wide Mouth", "Coffee Ready"],
-      "mainImage": "images/g3-office-main.jpg",
-      "detailImages": ["images/g3-office-main.jpg"],
+      "features": [
+        "Ti>99.8%",
+        "535ml",
+        "Wide Mouth",
+        "Coffee Ready"
+      ],
+      "mainImage": "images/office-mofei-main.jpeg",
+      "detailImages": [],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "535ml",
         "colors": "Ice Silver, Cherry Pink, Sky Blue, Gradient",
-        "weight": "215g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$50"
+    },
+    {
+      "id": "office-rongyu",
+      "series": "Rongyu ",
+      "seriesName": "Rongyu Stainless Steel Insulated Mug",
+      "category": "office",
+      "slug": "office-tea-rongyu",
+      "title": "Rongyu Stainless Steel Insulated Mug",
+      "description": "Elegant 480ml stainless steel tea mug. 3 colors: Ice Silver, Sky Blue, Cherry Pink. Daily office companion.",
+      "priceMin": 22,
+      "priceMax": 28,
+      "priceDisplay": "$22-28",
+      "badge": "",
+      "features": [
+        "304 Stainless Steel",
+        "480ml",
+        "3 Colors",
+        "Tea Cup"
+      ],
+      "mainImage": "images/office-rongyu-main.jpg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "480ml",
+        "colors": "Ice Silver, Sky Blue, Cherry Pink",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$15"
     },
     {
       "id": "kids-nannan",
-      "series": "囡囡",
+      "series": "Nannan",
       "seriesName": "Nannan Kids Pure Titanium Bottle",
       "category": "kids",
       "slug": "kids-titanium",
@@ -393,11 +486,19 @@
       "description": "550ml kids titanium bottle. Safe, lightweight, BPA-free. 2 colors: Sky Blue, Nebula Purple. Dealer price ¥260.",
       "priceMin": 260,
       "priceMax": 260,
-      "priceDisplay": "¥260",
+      "priceDisplay": "$45-52",
       "badge": "Safe",
-      "features": ["Ti>99.8%", "550ml", "BPA-Free", "Kids Safe"],
+      "features": [
+        "Ti>99.8%",
+        "550ml",
+        "BPA-Free",
+        "Kids Safe"
+      ],
       "mainImage": "images/g4-kids-main.jpg",
-      "detailImages": ["images/g4-kids-main.jpg", "images/g4-detail-1.jpg"],
+      "detailImages": [
+        "images/g4-kids-main.jpg",
+        "images/g4-detail-1.jpg"
+      ],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "550ml",
@@ -408,74 +509,273 @@
       }
     },
     {
+      "id": "glass-gaoshan",
+      "series": "Gaoshan",
+      "seriesName": "Gaoshan Crystal Glass Cup",
+      "title": "Gaoshan Crystal Glass Cup",
+      "category": "glass",
+      "price": "$5",
+      "mainImage": "images/glass-gaoshan-main.jpg",
+      "features": [
+        "Borosilicate Glass",
+        "Single Layer",
+        "Heat Resistant",
+        "Lightweight"
+      ],
+      "description": "Gaoshan high borosilicate glass cup with panda motif. Heat resistant up to 600°C. Lightweight and elegant, perfect for daily hydration. Pairs beautifully with our titanium drinkware.",
+      "images": [
+        "images/glass-gaoshan-main.jpg"
+      ],
+      "slug": "titanium-glass-gaoshan",
+      "priceDisplay": "$5-9",
+      "priceMin": 5,
+      "priceMax": 9
+    },
+    {
       "id": "glass-yunduan",
-      "series": "雲端",
-      "seriesName": "Yunduan Titanium Glass Cup",
+      "series": "Yunduan",
+      "seriesName": "Yunduan Pure Titanium Glass Tumbler",
       "category": "other",
-      "slug": "titanium-glass",
-      "title": "Yunduan Pure Titanium Glass Cup",
-      "description": "Artistic double/single layer titanium glass. Available in 66mm (300ml/420ml) and 70mm (350ml/520ml). 4 colors each: Sky Blue, Silver, Ocean Blue, Nebula Purple. Dealer price from ¥120.",
-      "priceMin": 120,
-      "priceMax": 135,
-      "priceDisplay": "¥120-135",
+      "slug": "titanium-glass-yunduan",
+      "title": "Yunduan Pure Titanium Glass Tumbler",
+      "description": "Artistic double/single layer pure titanium glass. 300-520ml. 4 colors: Sky Blue, Silver, Cherry Pink, Gradient. Elegant transparency meets titanium safety.",
+      "priceMin": 28,
+      "priceMax": 35,
+      "priceDisplay": "$28-35",
       "badge": "Artistic",
-      "features": ["Glass+Titanium", "300-520ml", "4 Colors", "Double Layer"],
-      "mainImage": "images/g5-glass-main.jpg",
-      "detailImages": ["images/g5-glass-main.jpg", "images/g5-detail-1.jpg"],
+      "features": [
+        "Glass+Titanium",
+        "300-520ml",
+        "4 Colors",
+        "Double Layer"
+      ],
+      "mainImage": "images/glass-yunduan-main.jpeg",
+      "detailImages": [],
       "specs": {
         "material": "Borosilicate Glass + Pure Titanium",
         "capacity": "300ml / 420ml / 350ml / 520ml",
         "colors": "Sky Blue, Silver, Ocean Blue, Nebula Purple",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$25"
     },
     {
       "id": "container-taiyi",
-      "series": "太乙",
-      "seriesName": "Taiyi Pure Titanium Vacuum Canister",
+      "series": "Taixiang ",
+      "seriesName": "Taixiang Pure Titanium Food Storage Container",
       "category": "other",
-      "slug": "titanium-food-container",
-      "title": "Taiyi Pure Titanium Vacuum Seal Canister",
-      "description": "Vacuum seal pure titanium storage canister. 700ml and 1000ml. 2 colors: Silver, Gold. Dealer price from ¥150.",
-      "priceMin": 150,
-      "priceMax": 160,
-      "priceDisplay": "¥150-160",
+      "slug": "titanium-container-taiyi",
+      "title": "Taixiang Pure Titanium Food Storage Container",
+      "description": "Vacuum seal pure titanium food storage container. 700ml and 1000ml. 2 colors: Silver, Gradient. Antibacterial, preserves freshness.",
+      "priceMin": 35,
+      "priceMax": 42,
+      "priceDisplay": "$35-42",
       "badge": "",
-      "features": ["Ti>99.8%", "700-1000ml", "Vacuum Seal", "2 Colors"],
-      "mainImage": "images/g8-container-main.jpg",
-      "detailImages": ["images/g8-container-main.jpg"],
+      "features": [
+        "Ti>99.8%",
+        "700-1000ml",
+        "Vacuum Seal",
+        "2 Colors"
+      ],
+      "mainImage": "images/container-taiyi-main.jpeg",
+      "detailImages": [],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "700ml / 1000ml",
         "colors": "Silver, Gold",
-        "certifications": "FDA, LFGB",
-        "packaging": "Retail gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$20"
     },
     {
       "id": "mini-boya",
-      "series": "铂雅",
-      "seriesName": "Boya Mini Pocket Titanium Cup",
+      "series": "Boya",
+      "seriesName": "Boya Pure Titanium Mini Pocket Mug",
       "category": "other",
-      "slug": "titanium-thermos",
-      "title": "Boya Pure Titanium Mini Pocket Cup",
-      "description": "Compact 200ml pocket titanium cup. 5 colors: Ice Silver, Pink, Sky Blue, Nebula Purple, Peacock Green. Dealer price ¥160.",
-      "priceMin": 160,
-      "priceMax": 160,
-      "priceDisplay": "¥160",
+      "slug": "mini-boya-pocket-cup",
+      "title": "Boya Pure Titanium Mini Pocket Mug",
+      "description": "Compact 200ml pocket pure titanium mug. 5 colors: Ice Silver, Pink, Sky Blue, Nebula Purple, Rose Gold. Ultra-portable, perfect as gift.",
+      "priceMin": 38,
+      "priceMax": 42,
+      "priceDisplay": "$38-42",
       "badge": "Mini",
-      "features": ["Ti>99.8%", "200ml", "5 Colors", "Pocket Size"],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": ["images/g1-thermos-main.jpg"],
+      "features": [
+        "Ti>99.8%",
+        "200ml",
+        "5 Colors",
+        "Pocket Size"
+      ],
+      "mainImage": "images/mini-boya-main.jpeg",
+      "detailImages": [],
       "specs": {
         "material": "Pure Titanium (Ti>99.8%)",
         "capacity": "200ml",
         "colors": "Ice Silver, Pink, Sky Blue, Nebula Purple, Peacock Green",
-        "weight": "130g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$65"
+    },
+    {
+      "id": "tea-qiyun",
+      "series": "Qiyun ",
+      "seriesName": "Qiyun Pure Titanium Tea Set",
+      "category": "office",
+      "slug": "tea-set-qiyun",
+      "title": "Qiyun Pure Titanium Tea Set",
+      "description": "Complete travel tea set in luxury case. Includes teapot, 6 cups, tea tools. Pure titanium construction. Ideal for gifting and tea enthusiasts.",
+      "priceMin": 577,
+      "priceMax": 680,
+      "priceDisplay": "$577-680",
+      "badge": "Premium",
+      "features": [
+        "Ti>99.8%",
+        "Full Set",
+        "Travel Case",
+        "Gift Ready"
+      ],
+      "mainImage": "images/tea-qiyun-main.jpeg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "contents": "1 teapot + 6 cups + tea tools",
+        "packaging": "Luxury travel case",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$268"
+    },
+    {
+      "id": "tea-taixingji",
+      "series": "Taixingji",
+      "seriesName": "Taixingji Pure Titanium Travel Tea Set",
+      "title": "Taixingji Pure Titanium Travel Tea Set",
+      "category": "tea",
+      "price": "$380",
+      "mainImage": "images/tea-taixingji-main.jpeg",
+      "features": [
+        "Pure Titanium",
+        "Travel Set",
+        "Premium"
+      ],
+      "description": "Taixingji premium pure titanium travel tea set. Complete set for tea lovers on the go. Perfect as gift or personal use.",
+      "images": [
+        "images/tea-taixingji-main.jpeg"
+      ],
+      "slug": "tea-set-taixingji",
+      "priceDisplay": "$590-620",
+      "priceMin": 590,
+      "priceMax": 620
+    },
+    {
+      "id": "tea-yuntu",
+      "series": "Yuntu",
+      "seriesName": "Yuntu Portable Pure Titanium Tea Set",
+      "title": "Yuntu Portable Pure Titanium Tea Set",
+      "category": "tea",
+      "price": "$15",
+      "mainImage": "images/tea-yuntu-main.jpeg",
+      "features": [
+        "Pure Titanium",
+        "Travel Tea Set",
+        "Lightweight"
+      ],
+      "description": "Yuntu portable pure titanium tea set. Compact travel design, enjoy tea ceremony anywhere. Lightweight and elegant.",
+      "images": [
+        "images/tea-yuntu-main.jpeg"
+      ],
+      "slug": "tea-set-yuntu",
+      "priceDisplay": "$18-25",
+      "priceMin": 18,
+      "priceMax": 25
+    },
+    {
+      "id": "flask-yuzun",
+      "series": "Yuzun ",
+      "seriesName": "Yuzun Pure Titanium Wine Flask",
+      "category": "other",
+      "slug": "flask-yuzun",
+      "title": "Yuzun Pure Titanium Wine Flask",
+      "description": "Premium pure titanium wine flask. 3 colors: Purple, Silver, Blue. Perfect for spirits and outdoor use. Leather carrying pouch included.",
+      "priceMin": 58,
+      "priceMax": 62,
+      "priceDisplay": "$58-62",
+      "badge": "Luxury",
+      "features": [
+        "Ti>99.8%",
+        "3 Colors",
+        "Zero Taste",
+        "Premium"
+      ],
+      "mainImage": "images/flask-yuzun-main.jpeg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "colors": "Purple, Silver, Blue",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$50"
+    },
+    {
+      "id": "cup-xingchen",
+      "series": "Xingchen",
+      "seriesName": "Xingchen Pure Titanium Tea & Shot Cup",
+      "category": "office",
+      "slug": "cup-xingchen",
+      "title": "Xingchen Pure Titanium Tea & Shot Cup",
+      "description": "Pure titanium single-layer tea and shot cup. 6 gorgeous colors. Antibacterial, no paint or coating. Lightweight and elegant.",
+      "priceMin": 22,
+      "priceMax": 28,
+      "priceDisplay": "$22-28",
+      "badge": "",
+      "features": [
+        "Ti>99.8%",
+        "6 Colors",
+        "No Paint",
+        "Antibacterial"
+      ],
+      "mainImage": "images/cup-xingchen-main.jpg",
+      "detailImages": [],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "colors": "6 colors available",
+        "finish": "Natural anodized, no paint or dye",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$15"
+    },
+    {
+      "id": "tumbler-xingyao",
+      "series": "Xingyao",
+      "seriesName": "Xingyao Pure Titanium Tumbler with Straw",
+      "category": "thermos",
+      "slug": "tumbler-xingyao",
+      "title": "Xingyao Pure Titanium Tumbler with Straw",
+      "description": "720ml pure titanium tumbler with straw. Ice crystal texture finish. Full dust cover, vacuum insulated. Perfect for cold beverages.",
+      "priceMin": 35,
+      "priceMax": 42,
+      "priceDisplay": "$35-42",
+      "badge": "Trending",
+      "features": [
+        "Ti>99.8%",
+        "720ml",
+        "With Straw",
+        "Ice Crystal"
+      ],
+      "mainImage": "images/tumbler-xingyao-detail-1.jpg",
+      "detailImages": [
+        "images/tumbler-xingyao-main.jpeg",
+        "images/tumbler-xingyao-detail-2.jpg",
+        "images/tumbler-xingyao-detail-3.jpg",
+        "images/tumbler-xingyao-detail-4.jpg",
+        "images/tumbler-xingyao-sku-gradient.jpg"
+      ],
+      "specs": {
+        "material": "Pure Titanium (Ti>99.8%)",
+        "capacity": "720ml",
+        "features": "Straw + dust cover",
+        "colors": "3 colors",
+        "certifications": "FDA, LFGB"
+      },
+      "price": "$35"
     }
   ],
   "siteInfo": {

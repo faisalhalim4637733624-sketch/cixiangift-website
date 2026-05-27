@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script>if(location.protocol==="http:"){location.replace("https:"+window.location.href.substring(window.location.protocol.length))}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GIFT Titanium - Product Management Admin</title>
@@ -600,6 +600,11 @@
       opacity: 1;
       visibility: visible;
     }
+
+    .loading-overlay:not(.active),
+    .modal-overlay:not(.active) {
+      pointer-events: none;
+    }
     
     .loading-spinner {
       width: 50px;
@@ -761,7 +766,8 @@
       </div>
       
       <div class="sidebar-section">
-        <div class="sidebar-title">Categories</div>
+        <div class="sidebar-title">Categories（官网筛选）</div>
+        <p style="font-size:11px;color:var(--text-muted);padding:0 12px 8px;line-height:1.4;">在产品卡片改 Category；新分类在 Edit 弹窗下方自定义 key。</p>
         <ul class="sidebar-nav" id="category-nav">
           <!-- Dynamically populated -->
         </ul>
@@ -851,14 +857,10 @@
           </div>
           
           <div class="form-group">
-            <label class="form-label">Category</label>
-            <select class="form-input" id="product-category">
-              <option value="thermos">Thermos</option>
-              <option value="outdoor">Outdoor</option>
-              <option value="office">Office</option>
-              <option value="kids">Kids</option>
-              <option value="other">Other</option>
-            </select>
+            <label class="form-label">Category（前台筛选分类）</label>
+            <select class="form-input" id="product-category"></select>
+            <input type="text" class="form-input" id="product-category-custom" placeholder="自定义分类 key（可选，如 gift-set）" style="margin-top:8px;font-size:13px;">
+            <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">侧栏 Categories 与官网 /products 页筛选用此字段。</p>
           </div>
           
           <div class="form-group">
@@ -867,8 +869,14 @@
           </div>
           
           <div class="form-group">
-            <label class="form-label">Main Image Path</label>
-            <input type="text" class="form-input" id="product-main-image" placeholder="images/g1-thermos-main.jpg">
+            <label class="form-label">Main Image</label>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+              <input type="text" class="form-input" id="product-main-image" placeholder="images/g1-thermos-main.jpg" style="flex:1;">
+              <label for="upload-main-image" style="cursor:pointer;padding:8px 14px;background:#4f6ef7;color:#fff;border-radius:6px;font-size:13px;white-space:nowrap;">
+                📷 上传图片
+              </label>
+              <input type="file" id="upload-main-image" accept="image/*" style="display:none;" onchange="handleImageUpload(this, 'product-main-image', 'main-image-preview')">
+            </div>
             <div class="image-preview" id="main-image-preview"></div>
           </div>
           
@@ -912,7 +920,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-        <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">确认删除</button>
       </div>
     </div>
   </div>
@@ -935,30 +943,148 @@
     let deleteProductId = null;
     let currentFeatures = [];
 
+    // Always use site-root JSON (./products.json breaks on /admin URL)
+    const PRODUCTS_JSON_URL = '/products.json';
+    const isLocalAdmin = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    function escAttr(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;');
+    }
+
+    function escHtml(value) {
+      return escAttr(value);
+    }
+
+    const DEFAULT_CATEGORIES = [
+      { key: 'thermos', name: 'Thermos 保温杯' },
+      { key: 'outdoor', name: 'Outdoor 户外' },
+      { key: 'office', name: 'Office 办公' },
+      { key: 'kids', name: 'Kids 儿童' },
+      { key: 'other', name: 'Accessories 配件' }
+    ];
+
+    function getCategories() {
+      const map = new Map();
+      DEFAULT_CATEGORIES.forEach(c => map.set(c.key, c.name));
+      (productsData?.siteInfo?.categories || []).forEach(c => {
+        if (typeof c === 'string') map.set(c, c);
+        else if (c?.key) map.set(c.key, c.name || c.key);
+      });
+      (productsData?.products || []).forEach(p => {
+        if (p.category && !map.has(p.category)) {
+          const label = p.category.charAt(0).toUpperCase() + p.category.slice(1).replace(/-/g, ' ');
+          map.set(p.category, label);
+        }
+      });
+      return Array.from(map.entries())
+        .map(([key, name]) => ({ key, name }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    function buildCategorySelect(selected, productId) {
+      const options = getCategories().map(c =>
+        `<option value="${escAttr(c.key)}"${c.key === selected ? ' selected' : ''}>${escHtml(c.name)}</option>`
+      ).join('');
+      return `<select class="form-input form-input-sm" onchange="updateProduct('${escAttr(productId)}', 'category', this.value); renderSidebar();">${options}</select>`;
+    }
+
+    function imageInputValue(path) {
+      if (!path) return '';
+      if (String(path).startsWith('data:')) return '[已上传，请点 Save Changes 保存]';
+      return escAttr(path);
+    }
+
+    function imagePreviewHtml(path, title) {
+      if (!path) return '';
+      const src = String(path).startsWith('data:') ? path : escAttr(path);
+      return `<img src="${src}" alt="${escAttr(title || '')}" onerror="this.style.display='none'">`;
+    }
+
+    function bindProductGridActions() {
+      const grid = document.getElementById('product-grid');
+      if (grid._actionsBound) return;
+      grid._actionsBound = true;
+      grid.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const id = btn.getAttribute('data-id');
+        if (!id) return;
+        if (btn.getAttribute('data-action') === 'delete') openDeleteModal(id);
+        if (btn.getAttribute('data-action') === 'edit') openEditModal(id);
+      });
+    }
+
+    function populateCategorySelectElement(selectEl, selected) {
+      if (!selectEl) return;
+      selectEl.innerHTML = getCategories().map(c =>
+        `<option value="${escAttr(c.key)}"${c.key === selected ? ' selected' : ''}>${escHtml(c.name)}</option>`
+      ).join('');
+    }
+
+    async function loadProductsData() {
+      if (isLocalAdmin) {
+        try {
+          const response = await fetch('/api/products');
+          const type = response.headers.get('content-type') || '';
+          if (response.ok && type.includes('json')) {
+            return await response.json();
+          }
+        } catch (e) {
+          console.warn('Local API unavailable, using products.json', e);
+        }
+      }
+
+      const fileResponse = await fetch(PRODUCTS_JSON_URL, { cache: 'no-store' });
+      if (!fileResponse.ok) {
+        throw new Error(`HTTP ${fileResponse.status} loading ${PRODUCTS_JSON_URL}`);
+      }
+      const text = await fileResponse.text();
+      if (text.trim().startsWith('<')) {
+        throw new Error('Received HTML instead of JSON — check products.json URL');
+      }
+      return JSON.parse(text);
+    }
+
+    function showModeBanner() {
+      if (isLocalAdmin) return;
+      const bar = document.createElement('div');
+      bar.id = 'admin-mode-banner';
+      bar.style.cssText = 'background:#3d2e00;color:#ffd666;padding:10px 16px;text-align:center;font-size:14px;border-bottom:1px solid #665500;';
+      bar.innerHTML = '线上后台为<b>只读预览</b>。要保存/上传图片并生成网站，请在本机运行 <code style="background:#1a1a1a;padding:2px 6px;border-radius:4px;">python3 server.py</code> 后打开 <a href="http://localhost:8899/admin.html" style="color:#7eb8ff;">localhost:8899/admin.html</a>';
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+
     // Initialize
     async function init() {
       showLoading();
       try {
-        const response = await fetch('/api/products');
-        productsData = await response.json();
+        productsData = await loadProductsData();
+        if (!productsData.products || !Array.isArray(productsData.products)) {
+          productsData.products = [];
+        }
         renderSidebar();
         renderProducts();
         updateStats();
+        bindProductGridActions();
+        showModeBanner();
+        if (!isLocalAdmin) {
+          showToast(`已加载 ${productsData.products.length} 个产品（线上预览）`, 'success');
+        }
       } catch (error) {
         console.error('Failed to load products:', error);
-        showToast('Failed to load products. Make sure server is running.', 'error');
-        // Load from file directly as fallback
-        try {
-          const fileResponse = await fetch('./products.json');
-          productsData = await fileResponse.json();
-          renderSidebar();
-          renderProducts();
-          updateStats();
-        } catch (e) {
-          showToast('Could not load products.json', 'error');
-        }
+        showToast('无法加载产品：请打开 /admin.html 或本机 server.py', 'error');
+        document.getElementById('product-grid').innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1;padding:3rem;text-align:center;">
+            <h3>加载失败</h3>
+            <p>请访问 <a href="/admin.html">/admin.html</a>，或在本机运行 <code>python3 server.py</code> 后打开 localhost:8899/admin.html</p>
+          </div>`;
+      } finally {
+        hideLoading();
       }
-      hideLoading();
     }
 
     // Render Sidebar
@@ -969,9 +1095,10 @@
       seriesNav.innerHTML = Array.from(seriesSet).map(series => {
         const product = productsData.products.find(p => p.series === series);
         const count = productsData.products.filter(p => p.series === series).length;
+        if (!product) return '';
         return `
-          <li><a href="#" onclick="filterProducts('${series}')" data-filter="${series}">
-            <span>${product.seriesName}</span>
+          <li><a href="#" onclick="filterProducts(${JSON.stringify(series)})" data-filter="${escAttr(series)}">
+            <span>${product.seriesName || series}</span>
             <span class="series-badge">${count}</span>
           </a></li>
         `;
@@ -979,19 +1106,11 @@
 
       // Category nav
       const categoryNav = document.getElementById('category-nav');
-      const categories = [
-        { key: 'thermos', name: 'Thermos' },
-        { key: 'outdoor', name: 'Outdoor' },
-        { key: 'office', name: 'Office' },
-        { key: 'kids', name: 'Kids' },
-        { key: 'other', name: 'Accessories' }
-      ];
-      categoryNav.innerHTML = categories.map(cat => {
+      categoryNav.innerHTML = getCategories().map(cat => {
         const count = productsData.products.filter(p => p.category === cat.key).length;
-        if (count === 0) return '';
         return `
-          <li><a href="#" onclick="filterProducts('${cat.key}')" data-filter="cat-${cat.key}">
-            <span>${cat.name}</span>
+          <li><a href="#" onclick="filterProducts('cat-${escAttr(cat.key)}')" data-filter="cat-${escAttr(cat.key)}">
+            <span>${escHtml(cat.name)}</span>
             <span class="series-badge">${count}</span>
           </a></li>
         `;
@@ -1003,6 +1122,7 @@
     // Render Products
     function renderProducts() {
       const grid = document.getElementById('product-grid');
+      if (!productsData || !Array.isArray(productsData.products)) return;
       let filteredProducts = productsData.products;
 
       if (currentFilter !== 'all') {
@@ -1025,25 +1145,41 @@
         return;
       }
 
+      try {
       grid.innerHTML = filteredProducts.map(product => `
         <div class="product-card" data-product-id="${product.id}">
           <div class="product-card-header">
             <div class="product-series">
-              <span class="product-series-badge">${product.series}</span>
-              <span class="product-category">${product.category}</span>
+              <span class="product-series-badge">${escHtml(product.series)}</span>
             </div>
             ${product.badge ? `<span class="badge-option selected" style="pointer-events:none">${product.badge}</span>` : ''}
           </div>
           <div class="product-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Series（如 G1）</label>
+                <input type="text" class="form-input form-input-sm" value="${escAttr(product.series)}"
+                       onchange="updateProduct('${escAttr(product.id)}', 'series', this.value); renderSidebar();">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Series Name</label>
+                <input type="text" class="form-input form-input-sm" value="${escAttr(product.seriesName || '')}"
+                       onchange="updateProduct('${escAttr(product.id)}', 'seriesName', this.value); renderSidebar();">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              ${buildCategorySelect(product.category, product.id)}
+            </div>
             <div class="form-group">
               <label class="form-label">Title</label>
-              <input type="text" class="form-input form-input-sm" value="${product.title}" 
-                     onchange="updateProduct('${product.id}', 'title', this.value)">
+              <input type="text" class="form-input form-input-sm" value="${escAttr(product.title)}" 
+                     onchange="updateProduct('${escAttr(product.id)}', 'title', this.value)">
             </div>
             <div class="form-group">
               <label class="form-label">Description</label>
               <textarea class="form-textarea form-input-sm" 
-                       onchange="updateProduct('${product.id}', 'description', this.value)">${product.description}</textarea>
+                       onchange="updateProduct('${escAttr(product.id)}', 'description', this.value)">${escHtml(product.description || '')}</textarea>
             </div>
             <div class="form-row">
               <div class="form-group">
@@ -1058,19 +1194,26 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Main Image Path</label>
-              <input type="text" class="form-input form-input-sm" value="${product.mainImage}"
-                     onchange="updateProduct('${product.id}', 'mainImage', this.value)">
-              ${product.mainImage ? `
-                <div class="image-preview">
-                  <img src="${product.mainImage}" alt="${product.title}" onerror="this.parentElement.innerHTML='<div class=image-preview-error>Image not found</div>'">
-                </div>
-              ` : ''}
+              <label class="form-label">Main Image</label>
+              <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+                <input type="text" class="form-input form-input-sm" value="${imageInputValue(product.mainImage)}"
+                       id="img-input-${escAttr(product.id)}"
+                       data-real-image="${imageInputValue(product.mainImage)}"
+                       onchange="updateProduct('${escAttr(product.id)}', 'mainImage', this.value); updateImagePreview('${escAttr(product.id)}', this.value)">
+                <label for="upload-${escAttr(product.id)}" style="cursor:pointer;padding:6px 10px;background:#4f6ef7;color:#fff;border-radius:6px;font-size:12px;white-space:nowrap;">
+                  📷 上传
+                </label>
+                <input type="file" id="upload-${escAttr(product.id)}" accept="image/*" style="display:none;"
+                       onchange="handleImageUpload(this, 'img-input-${escAttr(product.id)}', 'img-preview-${escAttr(product.id)}', '${escAttr(product.id)}')">
+              </div>
+              <div class="image-preview" id="img-preview-${escAttr(product.id)}">
+                ${product.mainImage ? imagePreviewHtml(product.mainImage, product.title) : ''}
+              </div>
             </div>
             <div class="form-group">
               <label class="form-label">Features</label>
               <div class="tags-container">
-                ${product.features.map((f, i) => `
+                ${(product.features || []).map((f, i) => `
                   <span class="tag">
                     ${f}
                     <span class="tag-remove" onclick="removeFeature('${product.id}', ${i})">&times;</span>
@@ -1093,7 +1236,7 @@
                       <button class="btn btn-sm btn-secondary" onclick="editSubProduct('${product.id}', '${sub.id}')">Edit</button>
                     </div>
                     <div style="font-size: 0.75rem; color: var(--text-muted);">
-                      Price: ${sub.priceDisplay} | ${sub.features.join(', ')}
+                      Price: ${sub.priceDisplay} | ${(sub.features || []).join(', ')}
                     </div>
                   </div>
                 `).join('')}
@@ -1101,41 +1244,41 @@
             ` : ''}
           </div>
           <div class="product-card-footer">
-            <button class="btn btn-sm btn-danger" onclick="openDeleteModal('${product.id}')">
+            <button type="button" class="btn btn-sm btn-danger" data-action="delete" data-id="${escAttr(product.id)}">
               Delete
             </button>
-            <button class="btn btn-sm btn-secondary" onclick="openEditModal('${product.id}')">
+            <button type="button" class="btn btn-sm btn-secondary" data-action="edit" data-id="${escAttr(product.id)}">
               Edit Details
             </button>
           </div>
         </div>
       `).join('');
+      } catch (err) {
+        console.error('renderProducts failed:', err);
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>渲染失败</h3><p>' + escHtml(err.message) + '</p></div>';
+      }
     }
 
     // Filter Products
     function filterProducts(filter) {
       currentFilter = filter;
       
-      // Update active state
       document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
-      document.querySelector(`[data-filter="${filter}"]`)?.classList.add('active');
+      const activeLink = document.querySelector(`.sidebar-nav a[data-filter="${filter}"]`);
+      if (activeLink) activeLink.classList.add('active');
       
-      // Update title
-      const titles = {
-        'all': 'All Products',
-        'thermos': 'Thermos Series',
-        'outdoor': 'Outdoor Series',
-        'office': 'Office Series',
-        'kids': 'Kids Series',
-        'other': 'Accessories'
-      };
-      
-      if (!titles[filter]) {
-        const product = productsData.products.find(p => p.series === filter);
-        document.getElementById('current-filter-title').textContent = product ? product.seriesName : 'Products';
+      let title = 'All Products';
+      if (filter === 'all') {
+        title = 'All Products';
+      } else if (filter.startsWith('cat-')) {
+        const key = filter.replace('cat-', '');
+        const cat = getCategories().find(c => c.key === key);
+        title = cat ? cat.name : key;
       } else {
-        document.getElementById('current-filter-title').textContent = titles[filter];
+        const product = productsData.products.find(p => p.series === filter);
+        title = product ? (product.seriesName || product.series) : filter;
       }
+      document.getElementById('current-filter-title').textContent = title;
       
       renderProducts();
     }
@@ -1145,9 +1288,15 @@
       document.getElementById('stat-products').textContent = productsData.products.length;
       document.getElementById('stat-series').textContent = new Set(productsData.products.map(p => p.series)).size;
       
-      const prices = productsData.products.flatMap(p => [p.priceMin, p.priceMax]);
-      document.getElementById('stat-min-price').textContent = '$' + Math.min(...prices);
-      document.getElementById('stat-max-price').textContent = '$' + Math.max(...prices);
+      const prices = productsData.products.flatMap(p => [p.priceMin, p.priceMax])
+        .filter(n => typeof n === 'number' && !Number.isNaN(n));
+      if (prices.length) {
+        document.getElementById('stat-min-price').textContent = '$' + Math.min(...prices);
+        document.getElementById('stat-max-price').textContent = '$' + Math.max(...prices);
+      } else {
+        document.getElementById('stat-min-price').textContent = '-';
+        document.getElementById('stat-max-price').textContent = '-';
+      }
     }
 
     // Update Product Field
@@ -1169,7 +1318,9 @@
       if (!feature) return;
       
       const product = productsData.products.find(p => p.id === productId);
-      if (product && !product.features.includes(feature)) {
+      if (!product) return;
+      if (!product.features) product.features = [];
+      if (!product.features.includes(feature)) {
         product.features.push(feature);
         renderProducts();
       }
@@ -1189,6 +1340,8 @@
       document.getElementById('product-form').reset();
       document.getElementById('product-id').value = '';
       document.getElementById('is-new-product').value = 'true';
+      document.getElementById('product-category-custom').value = '';
+      populateCategorySelectElement(document.getElementById('product-category'), 'thermos');
       currentFeatures = [];
       renderFeatureTags();
       document.getElementById('product-modal').classList.add('active');
@@ -1207,11 +1360,12 @@
       document.getElementById('product-description').value = product.description;
       document.getElementById('product-price-min').value = product.priceMin;
       document.getElementById('product-price-max').value = product.priceMax;
-      document.getElementById('product-category').value = product.category;
+      document.getElementById('product-category-custom').value = '';
+      populateCategorySelectElement(document.getElementById('product-category'), product.category || 'other');
       document.getElementById('product-slug').value = product.slug;
       document.getElementById('product-main-image').value = product.mainImage;
       
-      currentFeatures = [...product.features];
+      currentFeatures = [...(product.features || [])];
       renderFeatureTags();
       
       // Set badge
@@ -1280,12 +1434,32 @@
       }
     });
 
+    function slugifyAdmin(str) {
+      return String(str || '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+
     // Save Product
     function saveProduct() {
       const isNew = document.getElementById('is-new-product').value === 'true';
       const productId = document.getElementById('product-id').value;
       const badge = document.querySelector('#badge-select .badge-option.selected')?.dataset.badge || '';
+
+      let slug = document.getElementById('product-slug').value.trim();
+      if (!slug) {
+        const title = document.getElementById('product-title').value;
+        const img = document.getElementById('product-main-image').value || '';
+        const fromImg = img.split('/').pop().replace(/\.[^.]+$/, '') || '';
+        slug = slugifyAdmin(title) || slugifyAdmin(fromImg) || ('line-' + Date.now());
+        document.getElementById('product-slug').value = slug;
+      }
       
+      const customCat = document.getElementById('product-category-custom').value.trim().toLowerCase().replace(/\s+/g, '-');
+      const category = customCat || document.getElementById('product-category').value;
+
       const productData = {
         series: document.getElementById('product-series').value,
         seriesName: document.getElementById('product-series-name').value,
@@ -1293,8 +1467,8 @@
         description: document.getElementById('product-description').value,
         priceMin: parseInt(document.getElementById('product-price-min').value),
         priceMax: parseInt(document.getElementById('product-price-max').value),
-        category: document.getElementById('product-category').value,
-        slug: document.getElementById('product-slug').value,
+        category: category,
+        slug: slug,
         mainImage: document.getElementById('product-main-image').value,
         badge: badge,
         features: currentFeatures,
@@ -1343,7 +1517,7 @@
     function confirmDelete() {
       if (deleteProductId) {
         productsData.products = productsData.products.filter(p => p.id !== deleteProductId);
-        showToast('Product deleted!', 'success');
+        showToast('已删除。请点击顶部 Save Changes 保存，再点 Generate Website 更新网页', 'success');
         renderSidebar();
         renderProducts();
         updateStats();
@@ -1351,8 +1525,21 @@
       closeDeleteModal();
     }
 
+    function updateImagePreview(productId, path) {
+      const el = document.getElementById('img-preview-' + productId);
+      const product = productsData.products.find(p => p.id === productId);
+      if (el) {
+        el.innerHTML = path ? imagePreviewHtml(path, product?.title || '') : '';
+      }
+    }
+
     // Save Changes
     async function saveChanges() {
+      if (!isLocalAdmin) {
+        exportJSON();
+        showToast('线上无法直接保存：已下载 products.json，请在本机 server.py 中导入或 push 到 GitHub', 'warning');
+        return;
+      }
       showLoading();
       try {
         const response = await fetch('/api/products', {
@@ -1362,7 +1549,7 @@
         });
         
         if (response.ok) {
-          showToast('Changes saved successfully!', 'success');
+          showToast('已保存到 products.json！请再点 Generate Website 更新产品页', 'success');
         } else {
           throw new Error('Failed to save');
         }
@@ -1381,6 +1568,59 @@
         showToast('Download products.json and replace manually', 'warning');
       }
       hideLoading();
+    }
+
+    // Image Upload Handler — saves file to images/ on local server (not base64 in JSON)
+    function handleImageUpload(input, inputId, previewId, productId) {
+      const file = input.files[0];
+      if (!file) return;
+
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('图片太大，请上传 5MB 以内的图片', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const base64 = e.target.result;
+        const previewEl = document.getElementById(previewId);
+        if (previewEl) {
+          previewEl.innerHTML = `<img src="${base64}" alt="Preview" style="max-width:100%;border-radius:6px;">`;
+        }
+
+        if (!isLocalAdmin) {
+          showToast('线上无法保存图片。请用本机 python3 server.py 打开后台', 'error');
+          return;
+        }
+
+        try {
+          showToast('正在保存图片到 images/...', 'warning');
+          const filename = (file.name || 'upload.jpg').replace(/[^\w.\-]+/g, '-');
+          const res = await fetch('/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename, data: base64 })
+          });
+          const result = await res.json();
+          if (!res.ok || !result.success) {
+            if (res.status === 404) {
+              throw new Error('请关闭旧的服务窗口，运行 ./start-admin.sh 或重新 python3 server.py');
+            }
+            throw new Error(result.message || 'Upload failed');
+          }
+          const path = result.path;
+          const inputEl = document.getElementById(inputId);
+          if (inputEl) inputEl.value = path;
+          updateProduct(productId, 'mainImage', path);
+          updateImagePreview(productId, path);
+          showToast('图片已保存：' + path + '。请点 Save Changes', 'success');
+        } catch (err) {
+          console.error(err);
+          showToast('上传失败：' + err.message, 'error');
+        }
+        input.value = '';
+      };
+      reader.readAsDataURL(file);
     }
 
     // Export JSON
@@ -1432,6 +1672,10 @@
 
     // Build Website
     async function buildWebsite() {
+      if (!isLocalAdmin) {
+        showToast('生成网站请在本机运行: python3 server.py → 后台点 Generate Website', 'warning');
+        return;
+      }
       showLoading();
       showToast('Building website... This may take a moment.', 'warning');
       
