@@ -236,37 +236,6 @@
       "price": "$87"
     },
     {
-      "id": "outdoor-zunxiang",
-      "series": "Zunxiang",
-      "seriesName": "Zunxiang Pure Titanium Premium Flask",
-      "category": "outdoor",
-      "slug": "outdoor-flask",
-      "title": "Zunxiang Pure Titanium Premium Flask",
-      "description": "Premium 1500ml titanium flask. 4 colors: Silver, Glacier Blue, Gentleman Black, Ice Silver. Dealer price ¥550.",
-      "priceMin": 550,
-      "priceMax": 550,
-      "priceDisplay": "$220-500",
-      "badge": "Premium",
-      "features": [
-        "Ti>99.8%",
-        "1500ml",
-        "4 Colors",
-        "Premium"
-      ],
-      "mainImage": "images/g2-outdoor-main.jpg",
-      "detailImages": [
-        "images/g2-outdoor-main.jpg"
-      ],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "1500ml",
-        "colors": "Silver, Glacier Blue, Gentleman Black, Ice Silver",
-        "weight": "750g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
       "id": "office-chuanshi",
       "series": "Chuanshi ",
       "seriesName": "Chuanshi Pure Titanium Tea Brewing Mug",
