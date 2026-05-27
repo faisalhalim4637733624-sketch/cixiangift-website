@@ -239,37 +239,6 @@
       "price": "$45"
     },
     {
-      "id": "thermos-zuanshi",
-      "series": "Diamond",
-      "seriesName": "Zuanshi Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Zuanshi Pure Titanium Thermos",
-      "description": "500ml Diamond series thermos. 2 colors: Ocean Blue, Silver. Dealer price from ¥220.",
-      "priceMin": 220,
-      "priceMax": 230,
-      "priceDisplay": "$50-55",
-      "badge": "",
-      "features": [
-        "Ti>99.8%",
-        "500ml",
-        "2 Colors",
-        "Gift Box"
-      ],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": [
-        "images/g1-thermos-main.jpg"
-      ],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "500ml",
-        "colors": "Ocean Blue, Silver",
-        "weight": "290g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
       "id": "outdoor-explorer",
       "series": "Explorer",
       "seriesName": "Explorer Pure Titanium Outdoor Travel Flask",
@@ -355,37 +324,6 @@
         "certifications": "FDA, LFGB"
       },
       "price": "$50"
-    },
-    {
-      "id": "office-jueshi",
-      "series": "Jueshi",
-      "seriesName": "Jueshi Pure Titanium Office Cup",
-      "category": "office",
-      "slug": "office-tea-coffee",
-      "title": "Jueshi Pure Titanium Office Cup",
-      "description": "500ml wide-mouth office cup. 4 colors: Silver, Ice Silver, Sky Blue, Cherry Pink. Dealer price from ¥280.",
-      "priceMin": 280,
-      "priceMax": 290,
-      "priceDisplay": "$50-60",
-      "badge": "Office",
-      "features": [
-        "Ti>99.8%",
-        "500ml",
-        "Wide Mouth",
-        "Business Style"
-      ],
-      "mainImage": "images/g3-detail-2.jpg",
-      "detailImages": [
-        "images/g3-detail-2.jpg"
-      ],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "500ml",
-        "colors": "Silver, Ice Silver, Sky Blue, Cherry Pink",
-        "weight": "351g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
     },
     {
       "id": "office-mofei",
