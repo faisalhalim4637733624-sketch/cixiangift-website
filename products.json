@@ -68,37 +68,6 @@
       "price": "$168"
     },
     {
-      "id": "thermos-huazai",
-      "series": "Huazhai",
-      "seriesName": "Huazai Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Huazai Pure Titanium Thermos",
-      "description": "500ml classic design thermos. 2 colors: Silver, Galaxy Blue. Dealer price from ¥260.",
-      "priceMin": 260,
-      "priceMax": 270,
-      "priceDisplay": "$50-60",
-      "badge": "",
-      "features": [
-        "Ti>99.8%",
-        "500ml",
-        "Classic Design",
-        "Gift Box"
-      ],
-      "mainImage": "images/g1-detail-2.jpg",
-      "detailImages": [
-        "images/g1-detail-2.jpg"
-      ],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "500ml",
-        "colors": "Silver, Galaxy Blue",
-        "weight": "274g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
       "id": "thermos-jinyu",
       "series": "Goldfish",
       "seriesName": "Goldfish Pure Titanium Insulated Mug",
