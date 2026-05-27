@@ -99,39 +99,6 @@
       }
     },
     {
-      "id": "thermos-jiaren",
-      "series": "Jiaren",
-      "seriesName": "Jiaren Pure Titanium Thermos",
-      "category": "thermos",
-      "slug": "titanium-thermos",
-      "title": "Jiaren Pure Titanium Double-Wall Thermos",
-      "description": "Elegant double-wall pure titanium thermos. Available in 330ml and 450ml. Colors: Ice Silver, Ocean Blue, Pink, Gold. Dealer price from ¥260.",
-      "priceMin": 260,
-      "priceMax": 270,
-      "priceDisplay": "$120-280",
-      "badge": "Bestseller",
-      "features": [
-        "Ti>99.8%",
-        "330-450ml",
-        "Double Wall",
-        "Gift Box"
-      ],
-      "mainImage": "images/g1-thermos-main.jpg",
-      "detailImages": [
-        "images/g1-thermos-main.jpg",
-        "images/g1-detail-1.jpg",
-        "images/g1-detail-2.jpg"
-      ],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "330ml / 450ml",
-        "colors": "Ice Silver, Ocean Blue, Pink, Gold",
-        "weight": "260-290g",
-        "certifications": "FDA, LFGB",
-        "packaging": "Premium gift box included"
-      }
-    },
-    {
       "id": "thermos-jinyu",
       "series": "Goldfish",
       "seriesName": "Goldfish Pure Titanium Insulated Mug",
@@ -475,38 +442,6 @@
         "certifications": "FDA, LFGB"
       },
       "price": "$15"
-    },
-    {
-      "id": "kids-nannan",
-      "series": "Nannan",
-      "seriesName": "Nannan Kids Pure Titanium Bottle",
-      "category": "kids",
-      "slug": "kids-titanium",
-      "title": "Nannan Kids Pure Titanium Water Bottle",
-      "description": "550ml kids titanium bottle. Safe, lightweight, BPA-free. 2 colors: Sky Blue, Nebula Purple. Dealer price ¥260.",
-      "priceMin": 260,
-      "priceMax": 260,
-      "priceDisplay": "$45-52",
-      "badge": "Safe",
-      "features": [
-        "Ti>99.8%",
-        "550ml",
-        "BPA-Free",
-        "Kids Safe"
-      ],
-      "mainImage": "images/g4-kids-main.jpg",
-      "detailImages": [
-        "images/g4-kids-main.jpg",
-        "images/g4-detail-1.jpg"
-      ],
-      "specs": {
-        "material": "Pure Titanium (Ti>99.8%)",
-        "capacity": "550ml",
-        "colors": "Sky Blue, Nebula Purple",
-        "safety": "BPA-Free, Lead-Free",
-        "certifications": "FDA, LFGB",
-        "packaging": "Retail gift box included"
-      }
     },
     {
       "id": "glass-gaoshan",
